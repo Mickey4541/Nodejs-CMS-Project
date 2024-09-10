@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
             padding: 0;
             background-color: black;
         }
+
         h1 {
             color: white;
             text-align: center;
@@ -140,6 +142,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- Navbar -->
@@ -161,31 +164,40 @@
     <!-- Card Section 
      js ko code maa tyo - hunna. card-container ko kuraa see in readme.md-->
 
-     <div class="card-container">
-        <% if (blogs.length > 0) { %>
-            <% blogs.forEach((blog) => { %>
-            <div class="card">
-                <div class="card-title"><%- blog.title %></div>
-                <div class="card-subtitle"><%- blog.subTitle %></div>
-                <div class="card-description"><%- blog.description %></div>
-            </div>
-            <% }) %>
-        <% } else { %>
-            <h1>No blogs to show !!!</h1>
-        <% } %>
-    </div>
-    
+    <div class="card-container">
+        <% if (blogs.length> 0) { %>
+            <% blogs.forEach((blog)=> { %>
+                <div class="card">
+                    <div class="card-title"><%- blog.title %></div>
+                    <div class="card-subtitle"><%- blog.subTitle %></div>
+                    <div class="card-description"><%-
+                            blog.description.split(" ").slice(0, 10).join(" ") %>...</div>                
+                    <!-- Explanation:
+                    - blog.description.split(" "): This splits the description into an array of words using spaces as separators.
+                    - .slice(0, 10): This takes the first 10 words from the array.
+                    - .join(" "): This joins the words back into a string with spaces between them.
+                    - The ... at the end represents that the description continues, indicating that the full content can be read by clicking "
+                            Read More." -->
+                            <a href="/single/<%- blog.id %>">Read More</a>
+                    </div>
+                    <% }) %>
+                        <% } else { %>
+                            <h1>No blogs to show !!!</h1>
+                            <% } %>
+                </div>
 
-    <script>
-        function toggleMenu() {
-            const navbarMenu = document.getElementById('navbar-menu');
-            if (navbarMenu.classList.contains('show-menu')) {
-                navbarMenu.classList.remove('show-menu');
-            } else {
-                navbarMenu.classList.add('show-menu');
-            }
-        }
-    </script>
+
+                <script>
+                    function toggleMenu() {
+                        const navbarMenu = document.getElementById('navbar-menu');
+                        if (navbarMenu.classList.contains('show-menu')) {
+                            navbarMenu.classList.remove('show-menu');
+                        } else {
+                            navbarMenu.classList.add('show-menu');
+                        }
+                    }
+                </script>
 
 </body>
+
 </html>

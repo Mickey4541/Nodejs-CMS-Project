@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navbar and Blog Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            height: 35px;
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            position: relative;
+        }
+
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .navbar ul li {
+            margin: 0 15px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .navbar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hamburger Menu Styling */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 4px 0;
+        }
+
+        /* Hide Navbar Menu for Mobile */
+        .navbar ul {
+            flex-direction: row;
+        }
+
+        .navbar ul.show-menu {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background-color: #333;
+            width: 100%;
+        }
+
+        .navbar ul.show-menu li {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        /* Blog Page Styling */
+        .blog-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .blog-container h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 36px;
+            color: #2c3e50;
+        }
+
+        .blog-container h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #2980b9;
+        }
+
+        .blog-container p {
+            font-size: 18px;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        /* Media Query for smaller screens */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .navbar ul {
+                display: none;
+            }
+
+            .navbar ul.show-menu {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <h1>My Blog Page</h1>
+        <div class="navbar">
+            <div class="hamburger" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <ul id="navbar-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/createBlog">CreateBlog</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Blog Page Section...aaha hamile blog[0] nai kina gareko vaney
+    hamile pahile id maa aauta specific blog ko data mageko 
+    tyo mageko data aautai aayo aani teslai page maa dekhaudaa pani
+    index 0 nai huni vayo. -->
+    <div class="blog-container">
+        <h2><%- blog[0].title %></h2>
+        <h3><%- blog[0].subTitle %></h3>
+        <p><%- blog[0].description %></p>
+        <div>
+            published on <%- blog[0].createdAt.toISOString().slice(0,10)%>
+        </div>
+    </div>
+    
+
+    <script>
+        function toggleMenu() {
+            const navbarMenu = document.getElementById('navbar-menu');
+            if (navbarMenu.classList.contains('show-menu')) {
+                navbarMenu.classList.remove('show-menu');
+            } else {
+                navbarMenu.classList.add('show-menu');
+            }
+        }
+    </script>
+
+</body>
+</html>

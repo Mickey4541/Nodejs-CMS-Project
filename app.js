@@ -32,7 +32,7 @@ app.get("/",async (req,res)=>{
     //so hamile yehi blogs page maa data nikalna laako.
     //blogs vanni table bata vayejati sabai data dey vaneko.
     const allBlogs = await blogs.findAll()
-    //console.log(allBlogs);
+    console.log(allBlogs);
     
     //blogs vanni key maa allBlogs vanni value maa aako data pass gareko
     res.render("blogs", {blogs:allBlogs});
@@ -40,7 +40,7 @@ app.get("/",async (req,res)=>{
 
 //createBlog.....blogpage
 app.get("/createBlog",(req,res)=>{
-    res.render("createBlog");
+    res.render("createBlog.ejs");
 })
 
 //hamile /createBlog wala api banayim
@@ -71,6 +71,30 @@ app.post("/createBlog", async (req, res)=>{
     //aaba request garepaxi response ta hunai parxa.
     //so, response maa res.send gareko.
     res.redirect("/")
+})
+
+//Single blog page:::::::::::::::;;;;;;
+//here :id is params
+app.get("/single/:id", async (req, res)=>{
+    const id = req.params.id
+    //second approach(destructuring)
+    //const {id} = req.params
+
+    //specific id ko data magnu/find garnu paryo aba database ko table bata.
+    const blog = await blogs.findAll({
+        where : {
+            id : id//yo first ko id is database ko data ko id aani second id vaneko mathi ko const id = req.params.id ko id ho
+        }
+    })
+
+    //second approach
+    //const blog = await blogs.findByPk(id)
+    //console.log(blog);
+    
+
+    //aaha samma blog maa aayera data baseko xa, aba tyo data lai singleBlog.ejs file maa pass garni.
+    //aauta blog name liyera(key) data aako wala blog pass gardeko.
+    res.render("singleBlogs.ejs", {blog:blog})
 })
 
 
