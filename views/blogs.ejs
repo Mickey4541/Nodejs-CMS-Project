@@ -158,26 +158,23 @@
         </div>
     </header>
 
-    <!-- Card Section -->
-    <div class="card-container">
-        <div class="card">
-            <div class="card-title">Card 1</div>
-            <div class="card-subtitle">Subtitle 1</div>
-            <div class="card-description">This is the description for Card 1. It contains more detailed information about the content.</div>
-        </div>
+    <!-- Card Section 
+     js ko code maa tyo - hunna. card-container ko kuraa see in readme.md-->
 
-        <div class="card">
-            <div class="card-title">Card 2</div>
-            <div class="card-subtitle">Subtitle 2</div>
-            <div class="card-description">This is the description for Card 2. It contains more detailed information about the content.</div>
-        </div>
-
-        <div class="card">
-            <div class="card-title">Card 3</div>
-            <div class="card-subtitle">Subtitle 3</div>
-            <div class="card-description">This is the description for Card 3. It contains more detailed information about the content.</div>
-        </div>
+     <div class="card-container">
+        <% if (blogs.length > 0) { %>
+            <% blogs.forEach((blog) => { %>
+            <div class="card">
+                <div class="card-title"><%- blog.title %></div>
+                <div class="card-subtitle"><%- blog.subTitle %></div>
+                <div class="card-description"><%- blog.description %></div>
+            </div>
+            <% }) %>
+        <% } else { %>
+            <h1>No blogs to show !!!</h1>
+        <% } %>
     </div>
+    
 
     <script>
         function toggleMenu() {

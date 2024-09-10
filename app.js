@@ -27,8 +27,15 @@ app.use(express.urlencoded({extended:true}))
 
 
 //blogs.ejs....home
-app.get("/",(req,res)=>{
-    res.render("blogs");
+app.get("/",async (req,res)=>{
+    //aaba database ko data homepage(blogs) ko card maa dekhaunu parni xa.
+    //so hamile yehi blogs page maa data nikalna laako.
+    //blogs vanni table bata vayejati sabai data dey vaneko.
+    const allBlogs = await blogs.findAll()
+    //console.log(allBlogs);
+    
+    //blogs vanni key maa allBlogs vanni value maa aako data pass gareko
+    res.render("blogs", {blogs:allBlogs});
 })
 
 //createBlog.....blogpage
@@ -63,7 +70,7 @@ app.post("/createBlog", async (req, res)=>{
     //hamile form submit garna ko lagi request garim.
     //aaba request garepaxi response ta hunai parxa.
     //so, response maa res.send gareko.
-    res.send("Form Submitted Successfully");
+    res.redirect("/")
 })
 
 

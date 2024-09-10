@@ -51,7 +51,7 @@ app.set('view engine', 'ejs')
 # Now make a views folder and start the project.
 
 
-
+# Day5::::::::::::::::::::::::::::::::::::::::::::::::::
 # To connect database:
 -To connect sql database we need two different package:
  - sequelize ORM hamile use garxam (type orm vanum)
@@ -78,7 +78,7 @@ app.set('view engine', 'ejs')
         - BLOGS.create({title: "hello", subtitle: "hello", description : "hello"})
 
 - to SELECT(READ):
-        - BLOGS.findAll(); // To get all records
+        - BLOGS.findAll(); // To get all blogs
         - BLOGS.findOne({ where: { id: 1 } }); // To get a specific record
 
 -to delete:
@@ -87,3 +87,9 @@ app.set('view engine', 'ejs')
 -to update:
         - BLOGS.update({ description: "Updated description" }, { where: { id: 1 } });
 >>>>>>>>>>>>>>>So we use sequilize here in this project for easy.
+
+# DAY: 6::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+ -Inside blogs.ejs and in card-container:::
+        - <%-%> ra <%%>  yo dui ota maa difference vaneko
+         <%-%> chai dynamic content dekhaudaa yaa execute gardaa use hunxa
+        vaney <%%> chai js integrate garda use hunxa.
