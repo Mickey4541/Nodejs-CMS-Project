@@ -66,3 +66,17 @@ app.set('view engine', 'ejs')
  - npm start(we got error showing port:3306). It means xampp is not ON. we have to start xampp.
 
  - now to connect database , we have to copy config folder(bdConfig.js) and model folder(blogmodel.js and index.js). And modify according to need.
+
+
+ # SQL (Raw Query):(DEMO)
+ - INSERT INTO content (title, subtitle, description)VALUES ('Hey', 'Sub-hey', 'desc-hey');
+ - DELETE FROM content WHERE title = 'Dummy Title';
+ - SELECT * FROM content;
+
+>This sql is a raw query and time consuming, it is solved by sequelize(ORM):(DEMO):
+- to insert:
+        - BLOGS.create({title: "hello", subtitle: "hello", description : "hello"})
+- to SELECT:
+        - BLOGS.find()
+- to create:
+        - BLOGS.create()
