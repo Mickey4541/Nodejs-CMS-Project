@@ -74,9 +74,16 @@ app.set('view engine', 'ejs')
  - SELECT * FROM content;
 
 >This sql is a raw query and time consuming, it is solved by sequelize(ORM):(DEMO):
-- to insert:
+- to insert(CREATE):
         - BLOGS.create({title: "hello", subtitle: "hello", description : "hello"})
-- to SELECT:
-        - BLOGS.find()
-- to create:
-        - BLOGS.create()
+
+- to SELECT(READ):
+        - BLOGS.findAll(); // To get all records
+        - BLOGS.findOne({ where: { id: 1 } }); // To get a specific record
+
+-to delete:
+        - BLOGS.destroy({ where: { id: 1 } });
+
+-to update:
+        - BLOGS.update({ description: "Updated description" }, { where: { id: 1 } });
+>>>>>>>>>>>>>>>So we use sequilize here in this project for easy.
