@@ -47,3 +47,22 @@ app.set('view engine', 'ejs')
 - app.get("/",(req,res)=>{
     res.send("Hello WORLD");
 })
+
+# Now make a views folder and start the project.
+
+
+
+# To connect database:
+-To connect sql database we need two different package:
+ - sequelize ORM hamile use garxam (type orm vanum)
+ - mysql2
+        There are different variation of sql like: mysql, postgresql, sqlite.
+- Aba yeni version maa kun use garni vanni hunxa, here, we use mysql. hamile mysql ko pani version 2 use garna lageko xam. so, wee need to install two packages.
+
+-commands to install are:
+ - npm install sequelize mysql2
+ in case of found vulnerabilities: run - npm audit fix
+
+ - npm start(we got error showing port:3306). It means xampp is not ON. we have to start xampp.
+
+ - now to connect database , we have to copy config folder(bdConfig.js) and model folder(blogmodel.js and index.js). And modify according to need.
