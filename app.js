@@ -74,6 +74,7 @@ app.post("/createBlog", async (req, res)=>{
 })
 
 //Single blog page:::::::::::::::;;;;;;
+
 //here :id is params
 app.get("/single/:id", async (req, res)=>{
     const id = req.params.id
@@ -95,6 +96,19 @@ app.get("/single/:id", async (req, res)=>{
     //aaha samma blog maa aayera data baseko xa, aba tyo data lai singleBlog.ejs file maa pass garni.
     //aauta blog name liyera(key) data aako wala blog pass gardeko.
     res.render("singleBlogs.ejs", {blog:blog})
+})
+
+
+//delete page>>>>>>>>>>>>>>>>>>>>>>>>>>>>.
+app.get("/delete/:id", async (req,res)=>{
+    const id = req.params.id
+    //blogs vanni id bata tyo id ko blog delete gar vaneko
+    await blogs.destroy({
+        where : {
+            id : id
+        }
+    })
+    res.redirect("/")
 })
 
 

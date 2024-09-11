@@ -93,3 +93,6 @@ app.set('view engine', 'ejs')
         - <%-%> ra <%%>  yo dui ota maa difference vaneko
          <%-%> chai dynamic content dekhaudaa yaa execute gardaa use hunxa
         vaney <%%> chai js integrate garda use hunxa.
+
+# dElete blog: day 8
+        <button> <a href="/delete/<%- blog[0].id %>">Delete</a></button>

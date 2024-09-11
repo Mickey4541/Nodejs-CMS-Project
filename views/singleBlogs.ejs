@@ -129,6 +129,28 @@
                 display: flex;
             }
         }
+        button a{
+            padding: 5px;
+            border-radius: 10px;
+            color: white;
+            border: none;
+            margin-top: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            background-color: red;
+
+        }
+        button {
+            padding: 5px;
+            border-radius: 10px;
+            color: white;
+            border: none;
+            border: 1px solid white;
+            margin-top: 10px;
+            cursor: pointer;
+            background-color: red;
+
+        }
     </style>
 </head>
 <body>
@@ -160,6 +182,7 @@
         <div>
             published on <%- blog[0].createdAt.toISOString().slice(0,10)%>
         </div>
+        <button> <a href="/delete/<%- blog[0].id %>">Delete</a></button>
     </div>
     
 
