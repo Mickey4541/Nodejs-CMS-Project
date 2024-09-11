@@ -1,5 +1,6 @@
 const express = require('express');
 const { blogs } = require('./model/index');
+const { where } = require('sequelize');
 const app = express()
 
 
@@ -110,6 +111,49 @@ app.get("/delete/:id", async (req,res)=>{
     })
     res.redirect("/")
 })
+
+//edit page>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+app.get("/edit/:id", async (req, res)=>{
+    const id = req.params.id
+    //find id of that blog::
+    const blog = await blogs.findAll({
+        where : {
+            id : id
+        }
+    })
+    //console.log(req.params.id);
+    res.render("editBlog.ejs",{blog : blog})
+})
+
+app.post("/editBlog/:id", async (req,res)=>{
+    console.log(req.body);
+    const id = req.params.id
+    //second approach
+    // await blogs.update(req.body, {
+    //     where : {
+    //         id : id
+    //     }
+    // })
+    
+    //first appraoch: descructuring:::::
+    // const {title, subTitle, description} = req.body
+
+    const title = req.body.title
+    const subTitle = req.body.subtitle
+    const description = req.body.description
+
+    blogs.update({
+        title : title,
+        subTitle : subTitle,
+        description : description
+    },{
+        where : {
+            id: id
+        }
+    })
+    res.redirect("/single/" + id)
+})
+
 
 
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Navbar and Blog Page</title>
+    <title>Responsive Navbar and Form</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,7 +13,7 @@
         }
 
         h1 {
-            color: #333;
+            color: white;
             text-align: center;
         }
 
@@ -85,9 +85,9 @@
             margin: 10px 0;
         }
 
-        /* Blog Page Styling */
-        .blog-container {
-            max-width: 800px;
+        /* Form Styling */
+        .form-container {
+            max-width: 600px;
             margin: 50px auto;
             padding: 20px;
             background-color: white;
@@ -95,24 +95,45 @@
             border-radius: 8px;
         }
 
-        .blog-container h2 {
-            text-align: center;
-            margin-bottom: 10px;
-            font-size: 36px;
-            color: #2c3e50;
-        }
-
-        .blog-container h3 {
+        .form-container h2 {
             text-align: center;
             margin-bottom: 20px;
-            font-size: 24px;
-            color: #2980b9;
         }
 
-        .blog-container p {
+        .form-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-container input[type="text"],
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-container textarea {
+            resize: none;
+            height: 150px;
+        }
+
+        .form-container input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
             font-size: 18px;
-            line-height: 1.6;
-            text-align: justify;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #555;
         }
 
         /* Media Query for smaller screens */
@@ -129,35 +150,13 @@
                 display: flex;
             }
         }
-        button a{
-            padding: 5px;
-            border-radius: 10px;
-            color: white;
-            border: none;
-            margin-top: 10px;
-            cursor: pointer;
-            text-decoration: none;
-            background-color: red;
-
-        }
-        button {
-            padding: 5px;
-            border-radius: 10px;
-            color: white;
-            border: none;
-            border: 1px solid white;
-            margin-top: 10px;
-            cursor: pointer;
-            background-color: red;
-
-        }
     </style>
 </head>
 <body>
 
     <!-- Navbar -->
     <header>
-        <h1>My Blog Page</h1>
+        <h1>Edit your Blogs</h1>
         <div class="navbar">
             <div class="hamburger" onclick="toggleMenu()">
                 <div></div>
@@ -171,21 +170,23 @@
         </div>
     </header>
 
-    <!-- Blog Page Section...aaha hamile blog[0] nai kina gareko vaney
-    hamile pahile id maa aauta specific blog ko data mageko 
-    tyo mageko data aautai aayo aani teslai page maa dekhaudaa pani
-    index 0 nai huni vayo. -->
-    <div class="blog-container">
-        <h2><%- blog[0].title %></h2>
-        <h3><%- blog[0].subTitle %></h3>
-        <p><%- blog[0].description %></p>
-        <div>
-            published on <%- blog[0].createdAt.toISOString().slice(0,10)%>
-        </div>
-        <button> <a href="/delete/<%- blog[0].id %>">Delete</a></button>
-        <button> <a href="/edit/<%- blog[0].id %>">Update</a></button>
+    <!-- Form Section -->
+    <div class="form-container">
+        <h2>Update your Blog Title, Subtitle and Description.</h2>
+        <!-- UTaa app.js maa banako /createBlog yeta action maa call gareko -->
+        <form action="/editBlog/<%- blog[0].id %>" method="post">
+            <label for="title">Title</label>
+            <input type="text" value = "<%- blog[0].title %>"id="title" name="title" placeholder="Enter the title" required>
+
+            <label for="subtitle">Subtitle</label>
+            <input type="text" value = "<%- blog[0].subTitle %>" id="subtitle" name="subtitle" placeholder="Enter the subtitle" required>
+
+            <label for="description">Description</label>
+            <textarea id="description"  name="description" placeholder="Enter the description" required><%- blog[0].description %></textarea>
+
+            <input type="submit" value="Submit">
+        </form>
     </div>
-    
 
     <script>
         function toggleMenu() {
