@@ -154,21 +154,8 @@
 </head>
 <body>
 
-    <!-- Navbar -->
-    <header>
-        <h1>Edit your Blogs</h1>
-        <div class="navbar">
-            <div class="hamburger" onclick="toggleMenu()">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-            <ul id="navbar-menu">
-                <li><a href="/">Home</a></li>
-                <li><a href="/createBlog">CreateBlog</a></li>
-            </ul>
-        </div>
-    </header>
+    <!-- Navbar importing from navbar.ejs-->
+    <%- include("navbar.ejs")  %>
 
     <!-- Form Section -->
     <div class="form-container">
@@ -185,7 +172,7 @@
             <textarea id="description"  name="description" placeholder="Enter the description" required><%- blog[0].description %></textarea>
 
             <input type="submit" value="Submit">
-            <button style="padding: 10px ; background: #000; color: white; border-radius: 10px; margin-top: 5px;"><a href="/"></a>cancel</button>
+            <button style="padding: 10px ; background: #000; color: white; border-radius: 10px; margin-top: 5px;"><a href="/single/<%- blog[0].id %>"></a>cancel</button>
         </form>
     </div>
 

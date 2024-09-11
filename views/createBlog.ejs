@@ -154,21 +154,8 @@
 </head>
 <body>
 
-    <!-- Navbar -->
-    <header>
-        <h1>Create your Blogs</h1>
-        <div class="navbar">
-            <div class="hamburger" onclick="toggleMenu()">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-            <ul id="navbar-menu">
-                <li><a href="/">Home</a></li>
-                <li><a href="/createBlog">CreateBlog</a></li>
-            </ul>
-        </div>
-    </header>
+    <!-- Navbar importing from navbar.ejs-->
+    <%- include("navbar.ejs")  %>
 
     <!-- Form Section -->
     <div class="form-container">

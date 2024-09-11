@@ -128,7 +128,9 @@ app.get("/edit/:id", async (req, res)=>{
 app.post("/editBlog/:id", async (req,res)=>{
     console.log(req.body);
     const id = req.params.id
-    //second approach
+
+
+    //second approach but bad approach:
     // await blogs.update(req.body, {
     //     where : {
     //         id : id

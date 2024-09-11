@@ -155,21 +155,8 @@
 </head>
 <body>
 
-    <!-- Navbar -->
-    <header>
-        <h1>My Blog Page</h1>
-        <div class="navbar">
-            <div class="hamburger" onclick="toggleMenu()">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-            <ul id="navbar-menu">
-                <li><a href="/">Home</a></li>
-                <li><a href="/createBlog">CreateBlog</a></li>
-            </ul>
-        </div>
-    </header>
+    <!-- Navbar importing from navbar.ejs-->
+    <%- include("navbar.ejs")  %>
 
     <!-- Blog Page Section...aaha hamile blog[0] nai kina gareko vaney
     hamile pahile id maa aauta specific blog ko data mageko 
