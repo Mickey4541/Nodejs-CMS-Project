@@ -124,6 +124,16 @@
         .card-description {
             font-size: 16px;
             color: #777;
+            margin-bottom: 20px;
+        }
+        .card-container a{
+            font-size: 16px;
+            color: #777;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: green;
+            color: white;
+            text-decoration: none;
         }
 
         /* Media Query for smaller screens */
@@ -146,7 +156,7 @@
 <body>
 
     <!-- Navbar importing from navbar.ejs-->
-    <%- include("navbar.ejs")  %>
+    <%- include("components/navbar.ejs")  %>
 
     <!-- Card Section 
      js ko code maa tyo - hunna. card-container ko kuraa see in readme.md-->
@@ -172,6 +182,10 @@
                             <h1>No blogs to show !!!</h1>
                             <% } %>
                 </div>
+
+
+
+                <%- include("components/footer.ejs")  %>
 
 
                 <script>

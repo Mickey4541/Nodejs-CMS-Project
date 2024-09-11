@@ -156,8 +156,7 @@
 <body>
 
     <!-- Navbar importing from navbar.ejs-->
-    <%- include("navbar.ejs")  %>
-
+    <%- include("components/navbar.ejs")  %>
     <!-- Blog Page Section...aaha hamile blog[0] nai kina gareko vaney
     hamile pahile id maa aauta specific blog ko data mageko 
     tyo mageko data aautai aayo aani teslai page maa dekhaudaa pani
@@ -172,6 +171,10 @@
         <button> <a href="/delete/<%- blog[0].id %>">Delete</a></button>
         <button> <a href="/edit/<%- blog[0].id %>">Update</a></button>
     </div>
+
+
+    <%- include("components/footer.ejs")  %>
+
     
 
     <script>

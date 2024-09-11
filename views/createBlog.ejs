@@ -155,8 +155,7 @@
 <body>
 
     <!-- Navbar importing from navbar.ejs-->
-    <%- include("navbar.ejs")  %>
-
+    <%- include("components/navbar.ejs")  %>
     <!-- Form Section -->
     <div class="form-container">
         <h2>Enter your Blog Title, Subtitle and Description.</h2>
@@ -174,6 +173,10 @@
             <input type="submit" value="Submit">
         </form>
     </div>
+
+
+    <%- include("components/footer.ejs")  %>
+
 
     <script>
         function toggleMenu() {

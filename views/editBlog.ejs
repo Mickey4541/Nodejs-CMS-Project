@@ -155,8 +155,7 @@
 <body>
 
     <!-- Navbar importing from navbar.ejs-->
-    <%- include("navbar.ejs")  %>
-
+    <%- include("components/navbar.ejs")  %>
     <!-- Form Section -->
     <div class="form-container">
         <h2>Update your Blog Title, Subtitle and Description.</h2>
@@ -175,6 +174,10 @@
             <button style="padding: 10px ; background: #000; color: white; border-radius: 10px; margin-top: 5px;"><a href="/single/<%- blog[0].id %>"></a>cancel</button>
         </form>
     </div>
+
+
+    <%- include("components/footer.ejs")  %>
+
 
     <script>
         function toggleMenu() {
