@@ -158,4 +158,9 @@ app.post("/editBlog/:id", async (req,res)=>{
 
 
 
+//css file lai access garna dey vaneko node js lai.
+//external css link garna paremaa node js lai hamile aagai
+//vannu parxa ki malai yo yo file access garna dey.
+app.use(express.static("public"))
+
 
