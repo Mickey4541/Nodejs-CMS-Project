@@ -96,3 +96,46 @@ app.set('view engine', 'ejs')
 
 # dElete blog: day 8
         <button> <a href="/delete/<%- blog[0].id %>">Delete</a></button>
+
+
+# How to import tempelates and use it??
+- AAhile currently mero hello folder bhitra 
+matra tempelate website xa. yesma aafai kei content change garna ta milyo tara ejs bata dynamically data fetch/tanna ta mildaina.
+
+- Tesko lagi hello folder bhitra vako sabai code lai views bhitra leunu paryo.
+
+ - tespaxi index.html lai index.ejs ,,,
+ components.html lai components.ejs banauna paryo. Components vaneko html nai ho sayad. basically, html file lai ejs maa convert garna paryo.
+
+ - aba tyo bnarkhar index.html file lai index.ejs banako file lai access garna paryo. tesko lagi app.js file bata access garni path banauna paryo:
+
+ - app.get("/portfolio", (req,res)=>{
+        res.render("index.ejs)
+ })
+
+ - aba yeti garera url localhost:3000/portfolio garepaxi site aauxa. Aba yo site maa dynamic content halna milyo. <%- %> yo bhitra.
+
+
+ - for example: yei mathi ko code modify gareko hai for dynamic content:
+ - app.get("/portfolio", (req,res)=>{
+        const myData = [
+                {
+                        name: rajan,
+                        email : rajan@gmail.com
+                }
+        ]
+        res.render("index.ejs)
+ })
+
+ - jun yo const myData aahile database bata aai rako maanam hai:
+ const myData = [
+                {
+                        name: rajan,
+                        email : rajan@gmail.com
+                }
+        ]
+
+
+-aba portfolio maa hero section maa hello i am rajan and i am web developer lekhya hunxa, ho tyo rajan bhandari dynamically database bata halna lageko aba:
+
+- Static Rajan Bhandari lekhako maa, <%- myData[0].name %> lekhni ani  myData[0].email lekhni kinaki database ko data const myData maa save vaako xa.

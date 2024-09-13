@@ -162,5 +162,24 @@ app.post("/editBlog/:id", async (req,res)=>{
 //external css link garna paremaa node js lai hamile aagai
 //vannu parxa ki malai yo yo file access garna dey.
 app.use(express.static("public"))
+app.use(express.static("hello"))
 
 
+
+//external tempelate wala section:
+
+
+app.get("/portfolio", (req,res)=>{
+    const myData = [
+        {
+                name: "Razan Bhandari",
+                whoami : "Full Stack Web Developer",
+        }
+]
+    res.render("index.ejs", {myData : myData})
+})
+
+
+app.get("/components", (req,res)=>{
+    res.render("components")
+})
