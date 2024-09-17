@@ -139,3 +139,10 @@ matra tempelate website xa. yesma aafai kei content change garna ta milyo tara e
 -aba portfolio maa hero section maa hello i am rajan and i am web developer lekhya hunxa, ho tyo rajan bhandari dynamically database bata halna lageko aba:
 
 - Static Rajan Bhandari lekhako maa, <%- myData[0].name %> lekhni ani  myData[0].email lekhni kinaki database ko data const myData maa save vaako xa.
+
+
+
+
+
+--aauta CICD kk ho continuous deployment vanni deplo garni bela look at its details.
+-- nodejs in render and sql in railway.
