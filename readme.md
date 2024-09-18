@@ -146,3 +146,8 @@ matra tempelate website xa. yesma aafai kei content change garna ta milyo tara e
 
 --aauta CICD kk ho continuous deployment vanni deplo garni bela look at its details.
 -- To host do this ::nodejs in render and sql in railway.
+
+
+- Session: Temporary data stored on the server.
+- Cookie: Small data stored on the user's browser.
+- Token: A secure way to authenticate users, often passed between client and server.
