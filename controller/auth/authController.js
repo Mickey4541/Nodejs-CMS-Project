@@ -35,6 +35,33 @@ exports.renderLoginForm = (req,res)=>{
     res.render("login")
 }
 
-exports.loginUser = (req,res)=>{
+exports.loginUser = async(req,res)=>{
     console.log(req.body)
+
+    const{email,password} = req.body
+    //serverside validation
+    if(!email || !password){
+        return res.send("Email and password are required")
+    }
+
+    //check if that email exists or not
+    const associateDataWithEmail = await users.findAll({
+        where : {
+            email : email
+
+        }        
+    })
+    if(associateDataWithEmail.length == 0){
+        res.send("User with thar email doesn't exists")
+    }else{
+        //check if password also matches
+        const associateDataWithEmailPassowrd = associateDataWithEmail[0].password
+        const isMatched =  bcrypt.compareSync(password, associateDataWithEmailPassowrd)//it returns true or false
+        if(isMatched){
+            res.send("Login Successfully")
+        }else{
+            res.send("Invalid password.")
+        }
+    }
+    //if the email exist it gives=>[] and xa vaney[{name: "", password: "", email: ""}]
 }
