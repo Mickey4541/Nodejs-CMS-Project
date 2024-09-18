@@ -1,12 +1,15 @@
 const express = require('express');
-const { blogs } = require('./model/index');
-const { where } = require('sequelize');
+//const { blogs, sequelize } = require('./model/index');
+//const { where } = require('sequelize');
+//const { renderCreateBlog, createBlog, allBlog, singleBlog, deleteBlog, rendereditBlog, editBlog } = require('./controller/blog/blogController');
 const app = express()
 
 
 //database connection
 require("./model/index")
 
+
+//server listening  
 app.listen(3000,()=>{
     console.log("Nodejs project has started on port 3000.");
     
@@ -28,133 +31,32 @@ app.use(express.urlencoded({extended:true}))
 
 
 //blogs.ejs....home
-app.get("/",async (req,res)=>{
-    //aaba database ko data homepage(blogs) ko card maa dekhaunu parni xa.
-    //so hamile yehi blogs page maa data nikalna laako.
-    //blogs vanni table bata vayejati sabai data dey vaneko.
-    const allBlogs = await blogs.findAll()
-    console.log(allBlogs);
-    
-    //blogs vanni key maa allBlogs vanni value maa aako data pass gareko
-    res.render("blogs", {blogs:allBlogs});
-})
-
-//createBlog.....blogpage
-app.get("/createBlog",(req,res)=>{
-    res.render("createBlog.ejs");
-})
-
-//hamile /createBlog wala api banayim
-//adding blog/post content::::submitting form content to node js.
-app.post("/createBlog", async (req, res)=>{
-    //form bata haleko data haru req bhitra ko object bhitra ko (body) maa aauxa jahile pani.
-    // console.log(req.body);
+//app.get("/",allBlog)
 
 
-    //if xutta xuttai lina paryo vani....
-    const title = req.body.title
-    const description = req.body.description
-    const subTitle = req.body.subtitle
-    //console.log(title, subTitle, description);
-    
-    //tara if yei 3 line lai destructure garnu paryo vani:
-    /*const {title, subTitle, description} = req.body*/
 
+//aba yo code app.get ra app.post blogroute.js maa xa
+// //createBlog.....blogpage
+// app.get("/createBlog",renderCreateBlog)
 
-//aaba database ko blogs vanni table maa data halna lageko::
-//database maa opertion garda sadhai async await.
-    await blogs.create({
-        title: title,
-        subTitle: subTitle,
-        description: description
-    })
-    //hamile form submit garna ko lagi request garim.
-    //aaba request garepaxi response ta hunai parxa.
-    //so, response maa res.send gareko.
-    res.redirect("/")
-})
+// //hamile /createBlog wala api banayim
+// //adding blog/post content::::submitting form content to node js.
+// app.post("/createBlog",createBlog)
 
 //Single blog page:::::::::::::::;;;;;;
 
+
 //here :id is params
-app.get("/single/:id", async (req, res)=>{
-    const id = req.params.id
-    //second approach(destructuring)
-    //const {id} = req.params
-
-    //specific id ko data magnu/find garnu paryo aba database ko table bata.
-    const blog = await blogs.findAll({
-        where : {
-            id : id//yo first ko id is database ko data ko id aani second id vaneko mathi ko const id = req.params.id ko id ho
-        }
-    })
-
-    //second approach
-    //const blog = await blogs.findByPk(id)
-    //console.log(blog);
-    
-
-    //aaha samma blog maa aayera data baseko xa, aba tyo data lai singleBlog.ejs file maa pass garni.
-    //aauta blog name liyera(key) data aako wala blog pass gardeko.
-    res.render("singleBlogs.ejs", {blog:blog})
-})
+// app.get("/single/:id", singleBlog)
 
 
-//delete page>>>>>>>>>>>>>>>>>>>>>>>>>>>>.
-app.get("/delete/:id", async (req,res)=>{
-    const id = req.params.id
-    //blogs vanni id bata tyo id ko blog delete gar vaneko
-    await blogs.destroy({
-        where : {
-            id : id
-        }
-    })
-    res.redirect("/")
-})
+// //delete page>>>>>>>>>>>>>>>>>>>>>>>>>>>>.
+// app.get("/delete/:id", deleteBlog)
 
-//edit page>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-app.get("/edit/:id", async (req, res)=>{
-    const id = req.params.id
-    //find id of that blog::
-    const blog = await blogs.findAll({
-        where : {
-            id : id
-        }
-    })
-    //console.log(req.params.id);
-    res.render("editBlog.ejs",{blog : blog})
-})
+// //edit page>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// app.get("/edit/:id", rendereditBlog)
 
-app.post("/editBlog/:id", async (req,res)=>{
-    console.log(req.body);
-    const id = req.params.id
-
-
-    //second approach but bad approach:
-    // await blogs.update(req.body, {
-    //     where : {
-    //         id : id
-    //     }
-    // })
-    
-    //first appraoch: descructuring:::::
-    // const {title, subTitle, description} = req.body
-
-    const title = req.body.title
-    const subTitle = req.body.subtitle
-    const description = req.body.description
-
-    blogs.update({
-        title : title,
-        subTitle : subTitle,
-        description : description
-    },{
-        where : {
-            id: id
-        }
-    })
-    res.redirect("/single/" + id)
-})
+// app.post("/editBlog/:id", editBlog )
 
 
 
@@ -164,3 +66,8 @@ app.post("/editBlog/:id", async (req,res)=>{
 app.use(express.static("public"))
 
 
+//ROUTES HERE
+const blogRoute = require("./routes/blogRoute.js")
+
+
+app.use("",blogRoute)

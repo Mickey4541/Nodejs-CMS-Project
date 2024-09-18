@@ -142,7 +142,7 @@ matra tempelate website xa. yesma aafai kei content change garna ta milyo tara e
 
 
 
-
+ 
 
 --aauta CICD kk ho continuous deployment vanni deplo garni bela look at its details.
--- nodejs in render and sql in railway.
+-- To host do this ::nodejs in render and sql in railway.
