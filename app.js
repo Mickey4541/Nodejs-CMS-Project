@@ -68,6 +68,10 @@ app.use(express.static("public"))
 
 //ROUTES HERE
 const blogRoute = require("./routes/blogRoute.js")
+app.use("",blogRoute)//localhost:3000 + /createBlog ===localhost:3000/createBlog
 
+const authRoute = require("./routes/authRoute.js")
+app.use("", authRoute) //localhost:3000/register
 
-app.use("",blogRoute)
+// for ex : 
+// app.use("/auth", authRoute) //localhost:3000/auth/register

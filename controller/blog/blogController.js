@@ -35,6 +35,8 @@ exports.createBlog =  async (req, res)=>{
 
 
 
+
+
 exports.allBlog = async (req,res)=>{
     //aaba database ko data homepage(blogs) ko card maa dekhaunu parni xa.
     //so hamile yehi blogs page maa data nikalna laako.
@@ -45,6 +47,8 @@ exports.allBlog = async (req,res)=>{
     //blogs vanni key maa allBlogs vanni value maa aako data pass gareko
     res.render("blogs", {blogs:allBlogs});
 }
+
+
 
 
 
@@ -71,6 +75,10 @@ exports.singleBlog = async (req, res)=>{
 }
 
 
+
+
+
+
 exports.deleteBlog  = async (req,res)=>{
     const id = req.params.id
     //blogs vanni id bata tyo id ko blog delete gar vaneko
@@ -81,6 +89,10 @@ exports.deleteBlog  = async (req,res)=>{
     })
     res.redirect("/")
 }
+
+
+
+
 
 
 exports.rendereditBlog = async (req, res)=>{
@@ -94,6 +106,9 @@ exports.rendereditBlog = async (req, res)=>{
     //console.log(req.params.id);
     res.render("editBlog.ejs",{blog : blog})
 }
+
+
+
 
 
 

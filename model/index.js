@@ -30,7 +30,7 @@ db.sequelize = sequelize;
 
 //importing model files.
 db.blogs = require("./blogModel.js")(sequelize, DataTypes);
-
+db.users = require("./userModel.js")(sequelize, DataTypes);
 //yo talako db.reviews vanni line chai reviews vanni table banauna ko lagi. Teska lagi yo code ra model bhitra reviewModel.js vanni file banayera blogModel.js maa vaako code halnu paryo.
 
 // db.reviews = require("./reviewModel.js")(sequelize, DataTypes);
