@@ -27,3 +27,14 @@ await users.create({
 })
     res.redirect("/login")
 }
+
+
+
+//LOGIN STARTS FORM HERE:::::::::::::::::::::::::::::::;;;
+exports.renderLoginForm = (req,res)=>{
+    res.render("login")
+}
+
+exports.loginUser = (req,res)=>{
+    console.log(req.body)
+}
