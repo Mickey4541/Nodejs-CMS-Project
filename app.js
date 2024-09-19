@@ -6,6 +6,10 @@ const app = express()
 
 require("dotenv").config()//requiring dotenv and initializing it with default configuration.
 
+
+const cookieParser = require("cookie-parser")
+app.use(cookieParser())
+
 //database connection
 require("./model/index")
 
@@ -18,6 +22,7 @@ app.listen(3000,()=>{
 
 // Setting ejs:::Telling the nodejs to set view-engine to ejs.
 app.set('view engine', 'ejs')
+
 
 // hamile nodejs lai vanim ki form bata data lidaa json maa convert and handle gareko.
 //form lai database yaa node maa submit gardaa yo dui line of code chai lekhnai parxa.

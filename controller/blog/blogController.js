@@ -6,8 +6,12 @@ exports.renderCreateBlog = (req,res)=>{
 
 
 exports.createBlog =  async (req, res)=>{
+    //uta isAuthenticated.js bata aako req.user lai console gareko:
+    //console.log(req.user[0].id, "UserID from createBlog");
+    const blogCreateGarniUserKoId =  req.user[0].id
     //form bata haleko data haru req bhitra ko object bhitra ko (body) maa aauxa jahile pani.
     // console.log(req.body);
+
 
 
     //if xutta xuttai lina paryo vani....
@@ -25,7 +29,8 @@ exports.createBlog =  async (req, res)=>{
     await blogs.create({
         title: title,
         subTitle: subTitle,
-        description: description
+        description: description,
+        userId: blogCreateGarniUserKoId //kun id ko user ley blog create gareko ho. yo chai mathi line no. 11 bata aako.
     })
     //hamile form submit garna ko lagi request garim.
     //aaba request garepaxi response ta hunai parxa.

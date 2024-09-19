@@ -158,3 +158,11 @@ npm install jsonwebtoken
 
 # .env:::::
 npm install dotenv
+
+# to clear cache of git:
+git rm -r --cached folderName
+
+
+
+# to read cookie:
+npm install cookie-parser

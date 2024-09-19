@@ -117,7 +117,11 @@ h1 {
     font-size: 16px;
     color: #777;
     margin-bottom: 20px;
+    white-space: nowrap;      /* Ensure the content does not wrap onto the next line */
+    overflow: hidden;         /* Hide any overflow beyond the card boundary */
+    text-overflow: ellipsis;  /* Show "..." for overflowing content */
 }
+
 .card-container a{
     font-size: 16px;
     color: #777;

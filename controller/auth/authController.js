@@ -65,7 +65,7 @@ exports.loginUser = async(req,res)=>{
             res.cookie('token',token) //browser maa application tab vitra cookie vanney maa save hunxa.
 
 
-            console.log("THis is token..." + token);
+            console.log("This is token..." + token);
             
             res.send("Login Successfully")
         }else{
