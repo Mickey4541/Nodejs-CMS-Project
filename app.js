@@ -4,6 +4,7 @@ const express = require('express');
 //const { renderCreateBlog, createBlog, allBlog, singleBlog, deleteBlog, rendereditBlog, editBlog } = require('./controller/blog/blogController');
 const app = express()
 
+require("dotenv").config()//requiring dotenv and initializing it with default configuration.
 
 //database connection
 require("./model/index")

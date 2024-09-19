@@ -143,7 +143,7 @@ matra tempelate website xa. yesma aafai kei content change garna ta milyo tara e
 
 
  
-
+# CICD:
 --aauta CICD kk ho continuous deployment vanni deplo garni bela look at its details.
 -- To host do this ::nodejs in render and sql in railway.
 
@@ -151,3 +151,10 @@ matra tempelate website xa. yesma aafai kei content change garna ta milyo tara e
 - Session: Temporary data stored on the server.
 - Cookie: Small data stored on the user's browser.
 - Token: A secure way to authenticate users, often passed between client and server.
+
+# Token:
+to install token:
+npm install jsonwebtoken
+
+# .env:::::
+npm install dotenv

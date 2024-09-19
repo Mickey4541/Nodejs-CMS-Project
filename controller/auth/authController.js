@@ -1,6 +1,6 @@
 const { users } = require("../../model");
 const bcrypt = require("bcryptjs")
-
+const jwt = require("jsonwebtoken")
 exports.renderRegisterForm = (req,res)=>{
     res.render("register")
 }
@@ -58,6 +58,15 @@ exports.loginUser = async(req,res)=>{
         const associateDataWithEmailPassowrd = associateDataWithEmail[0].password
         const isMatched =  bcrypt.compareSync(password, associateDataWithEmailPassowrd)//it returns true or false
         if(isMatched){
+            //Generate token here:::::::::
+            const token = jwt.sign({id:associateDataWithEmail[0].id},process.env.SECRETKEY, {
+                expiresIn : "30d"
+            })
+            res.cookie('token',token) //browser maa application tab vitra cookie vanney maa save hunxa.
+
+
+            console.log("THis is token..." + token);
+            
             res.send("Login Successfully")
         }else{
             res.send("Invalid password.")
