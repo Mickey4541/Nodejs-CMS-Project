@@ -160,7 +160,7 @@ exports.editBlog = async (req,res)=>{
 
 
 
-//myblogs page>>>>>>>>>>>>>>>>>>>>>>......
+//myblogs page for specific user blogs>>>>>>>>>>>>>>>>>>>>>>......
 exports.renderMyBlogs = async (req,res)=>{
     //get this users blogs
     const userId = req.userId;
@@ -169,6 +169,10 @@ exports.renderMyBlogs = async (req,res)=>{
     const myBlogs = await blogs.findAll({
         where : {
             userId : userId
+        },
+        //if blog kasle lekhako ho tyo dekhauni vaye jun page maa dekhauni ho tyo page maa yesari include garna parxa.
+        include : {
+            model : users //users is tablename and model is table.
         }
     })
     res.render("myBlogs.ejs",{myBlogs : myBlogs})

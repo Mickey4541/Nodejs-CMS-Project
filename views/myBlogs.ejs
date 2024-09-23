@@ -14,12 +14,14 @@
     <h1>MyBlogs</h1>
 
     <div class="container">
-        <% myBlogs.forEach((blog)=>{ %>
+        <%myBlogs.length > 0 && myBlogs.forEach((blog)=>{ %>
             <div class="card">
                 <h2><%- blog.title  %></h2>
                 <h><%- blog.subTitle  %></h3>
                 <p><%- blog.description  %></p>
 
+                <p>Written by: <%- blog.user.username %></p>
+                <p>Published on: <%- blog.user.createdAt.toISOString().split('T')[0] %></p>
                 <a href="/single/<%- blog.id %>">Read More</a>
             </div>
        <% }) %>
