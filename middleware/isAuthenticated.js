@@ -38,7 +38,13 @@ exports.isAuthenticated = async(req,res,next)=>{
         res.send("user with that token doesn't exist")
     }else{
         req.user = userExist; 
+        req.userId  = userExist[0].id
+
         //decryptedResult.id
+
+        //mathi hamile userExist ko pura array nai pass gareko xau
+        //or if id matra pass garnu parey::
+        //req.userId  = userExist[0].id   grnu paryo
 
         //if userExist garxa vani usle blog create pani garna pauxa,
         next() //next vaneko aba createBlog maa jani blogController.js bhitra.

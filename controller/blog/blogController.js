@@ -1,4 +1,4 @@
-const { blogs } = require("../../model");
+const { blogs, users } = require("../../model");
 
 exports.renderCreateBlog = (req,res)=>{
     res.render("createBlog.ejs");
@@ -46,7 +46,13 @@ exports.allBlog = async (req,res)=>{
     //aaba database ko data homepage(blogs) ko card maa dekhaunu parni xa.
     //so hamile yehi blogs page maa data nikalna laako.
     //blogs vanni table bata vayejati sabai data dey vaneko.
-    const allBlogs = await blogs.findAll()
+    const allBlogs = await blogs.findAll({
+        //aba yaha blogs vanney table sanga users vanni table join garna lageko.
+        //join garnu parey include baata garney.
+        include : {
+            model : users //users is tablename and model is table.
+        }
+    })
     //console.log(allBlogs);
     
     //blogs vanni key maa allBlogs vanni value maa aako data pass gareko
@@ -66,6 +72,10 @@ exports.singleBlog = async (req, res)=>{
     const blog = await blogs.findAll({
         where : {
             id : id//yo first ko id is database ko data ko id aani second id vaneko mathi ko const id = req.params.id ko id ho
+        },
+         //aba yaha blogs vanney table sanga users vanni table join garna lageko.
+        include  : {
+            model : users
         }
     })
 
@@ -146,4 +156,20 @@ exports.editBlog = async (req,res)=>{
         }
     })
     res.redirect("/single/" + id)
+}
+
+
+
+//myblogs page>>>>>>>>>>>>>>>>>>>>>>......
+exports.renderMyBlogs = async (req,res)=>{
+    //get this users blogs
+    const userId = req.userId;
+    //find blogs of this userID
+    //console.log(userId)
+    const myBlogs = await blogs.findAll({
+        where : {
+            userId : userId
+        }
+    })
+    res.render("myBlogs.ejs",{myBlogs : myBlogs})
 }

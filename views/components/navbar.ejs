@@ -9,9 +9,20 @@
         <ul id="navbar-menu">
             <li><a href="/">Home</a></li>
             <li><a href="/createBlog">Create Blogs</a></li>
+            <li><a href="/myBlogs">My Blogs</a></li>
             <li><a href="/login">Login</a></li>
             <li><a href="/register">Register</a></li>
 
         </ul>
     </div>
 </header>
+<script>
+    function toggleMenu() {
+        const navbarMenu = document.getElementById('navbar-menu');
+        if (navbarMenu.classList.contains('show-menu')) {
+            navbarMenu.classList.remove('show-menu');
+        } else {
+            navbarMenu.classList.add('show-menu');
+        }
+    }
+</script>

@@ -25,6 +25,9 @@
             <textarea id="description"  name="description" placeholder="Enter the description" required><%- blog[0].description %></textarea>
 
             <input type="submit" value="Submit">
+            <!-- yaha nera problem xa...login na vayepani cancel button working hunu parxa,
+            blogroute.js file maa yo line::router.route("/edit/:id").get(isAuthenticated, rendereditBlog) ko isAuthenticated ley garda ho. solve this. -->
+
             <button style="padding: 10px ; background: #000; color: white; border-radius: 10px; margin-top: 5px;"><a href="/single/<%- blog[0].id %>"></a>cancel</button>
         </form>
     </div>

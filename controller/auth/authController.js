@@ -44,13 +44,19 @@ exports.loginUser = async(req,res)=>{
         return res.send("Email and password are required")
     }
 
+
+
     //check if that email exists or not
+    //findByPk -> returns {}.{}is object.
+    //findAll -> returns [{}] and this is array bhitra object.
     const associateDataWithEmail = await users.findAll({
         where : {
             email : email
 
         }        
     })
+    //aani findbypk or findone garim vani tala length ==0 garera length check
+    //garako xam tyo garna paidaina.
     if(associateDataWithEmail.length == 0){
         res.send("User with thar email doesn't exists")
     }else{
@@ -60,9 +66,12 @@ exports.loginUser = async(req,res)=>{
         if(isMatched){
             //Generate token here:::::::::
             const token = jwt.sign({id:associateDataWithEmail[0].id},process.env.SECRETKEY, {
-                expiresIn : "30d"
+                expiresIn : "15d"
             })
-            res.cookie('token',token) //browser maa application tab vitra cookie vanney maa save hunxa.
+            res.cookie('token',token,{
+                httpOnly:true,
+                maxAge : 24*60*60*1000 //15 min ko millisocond means 15 min paxi token expire hunxa,
+            }) //browser maa application tab vitra cookie vanney maa save hunxa.
 
 
             console.log("This is token..." + token);
