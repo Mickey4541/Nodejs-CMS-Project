@@ -13,11 +13,15 @@ exports.createBlog =  async (req, res)=>{
     // console.log(req.body);
 
 
-
     //if xutta xuttai lina paryo vani....
     const title = req.body.title
     const description = req.body.description
     const subTitle = req.body.subtitle
+     //This is for image.
+     const fileName = req.file.filename;
+     if(!title || !description || !subTitle || !req.file){
+        return res.send("Please Provide title, description, subtitle and filename.")
+     }
     //console.log(title, subTitle, description);
     
     //tara if yei 3 line lai destructure garnu paryo vani:
@@ -30,7 +34,8 @@ exports.createBlog =  async (req, res)=>{
         title: title,
         subTitle: subTitle,
         description: description,
-        userId: blogCreateGarniUserKoId //kun id ko user ley blog create gareko ho. yo chai mathi line no. 11 bata aako.
+        userId: blogCreateGarniUserKoId, //kun id ko user ley blog create gareko ho. yo chai mathi line no. 11 bata aako.
+        image : process.env.PROJECT_URL + fileName
     })
     //hamile form submit garna ko lagi request garim.
     //aaba request garepaxi response ta hunai parxa.

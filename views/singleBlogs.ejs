@@ -17,6 +17,7 @@
     <div class="blog-container">
         <h2><%- blog[0].title %></h2>
         <h3><%- blog[0].subTitle %></h3>
+        <img src="<%= blog[0].image %>" alt="" height="300" width="300" style="display: block; margin: auto;">
         <p><%- blog[0].description %></p>
         <div>
             published on <%- blog[0].createdAt.toISOString().slice(0,10)%>

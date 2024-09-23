@@ -24,6 +24,7 @@ app.listen(3000,()=>{
 app.set('view engine', 'ejs')
 
 
+
 // hamile nodejs lai vanim ki form bata data lidaa json maa convert and handle gareko.
 //form lai database yaa node maa submit gardaa yo dui line of code chai lekhnai parxa.
 //simply form bata kei data aaudai xa teslai parse gar vaneko.
@@ -70,6 +71,7 @@ app.use(express.urlencoded({extended:true}))
 //external css link garna paremaa node js lai hamile aagai
 //vannu parxa ki malai yo yo file access garna dey.
 app.use(express.static("public"))
+app.use(express.static("uploads"))
 
 
 //ROUTES HERE

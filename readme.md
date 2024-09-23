@@ -167,4 +167,23 @@ git rm -r --cached folderName
 # to read cookie:
 npm install cookie-parser
 
-day 19 :::26mins
+# Day 20:
+-Multer = to handle files and images.
+- sabai setup garera image upload vanni file maa aayo yaa aayena check garda aauta mistake hunxa dherai coders bata:
+ - file haru xaina vani -> application/json(content type)
+ - file haru xa vaney OR images haru halney xa vaney -> multipart/form-data(content type)
+
+ >>>>>>.To do this multipart::
+ we have to do:
+ - enctype = "multipart/form-data" in         <form action="/createBlog" method="post" enctype = "multipart/form-data"> of createBlog.ejs file.(in our case now.)
+
+
+ - now to view image in site:
+  In browse if i type this, i must see the image: http://localhost:3000/1727111780687-nepali.jpg
+
+  - To do this:
+  we have to give a permission to nodejs to read file like we give to public/css folder.
+
+  - Inside app.js do this:
+  app.use(express.static("uploads"))
+
