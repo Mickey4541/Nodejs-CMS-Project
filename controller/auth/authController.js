@@ -83,3 +83,9 @@ exports.loginUser = async(req,res)=>{
     }
     //if the email exist it gives=>[] and xa vaney[{name: "", password: "", email: ""}]
 }
+
+//logout wala code yo, ani authroute maa gayera route banauni:
+exports.logOut = (req,res)=>{
+    res.clearCookie('token')
+    res.redirect("/login")
+}

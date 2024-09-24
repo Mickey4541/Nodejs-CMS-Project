@@ -191,7 +191,7 @@ npm install cookie-parser
 # Day 21: 
 - Making navbar dynamic. MEans if we are login , navbar should show logout and if we are logged out, navbar should show login.
 
-- locals(res.locals)
+- locals(res.locals) : res.locals is a global variable to hold any thing.
 
 - checking filetype while uploading.
 

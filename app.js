@@ -13,6 +13,15 @@ app.use(cookieParser())
 //database connection
 require("./model/index")
 
+//making navbar dynamic, app.use maa haleko code everytime trigger hunxa.
+app.use((req,res,next)=>{
+    //console.log("Hello i am triggered");
+    res.locals.currentUser = req.cookies.token
+    next()
+    
+})
+
+    
 
 //server listening  
 app.listen(3000,()=>{

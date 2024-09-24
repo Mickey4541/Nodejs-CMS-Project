@@ -7,11 +7,17 @@
             <div></div>
         </div>
         <ul id="navbar-menu">
+           <%  if(currentUser){  %>
             <li><a href="/">Home</a></li>
             <li><a href="/createBlog">Create Blogs</a></li>
             <li><a href="/myBlogs">My Blogs</a></li>
-            <li><a href="/login">Login</a></li>
+            <li><a href="/logout">Logout</a></li>
+           
+          <%  }else{   %>
             <li><a href="/register">Register</a></li>
+            <li><a href="/login">Login</a></li>
+          <%  }  %>
+           
 
         </ul>
     </div>

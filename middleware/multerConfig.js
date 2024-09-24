@@ -8,6 +8,7 @@ var storage = multer.diskStorage({
             cb(new Error("Invalid file type. Only Supports png, jpeg and jpg."))//cb(error)
             return;
         }
+        //if filesize pani validate garnu pare, if file.size>2346........yesari gardaa hunxa
         //console.log(file.mimetype);
         
         cb(null, "./uploads/");//c(a,b)= success
