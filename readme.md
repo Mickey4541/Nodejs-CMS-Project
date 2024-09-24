@@ -187,3 +187,12 @@ npm install cookie-parser
   - Inside app.js do this:
   app.use(express.static("uploads"))
 
+
+# Day 21: 
+- Making navbar dynamic. MEans if we are login , navbar should show logout and if we are logged out, navbar should show login.
+
+- locals(res.locals)
+
+- checking filetype while uploading.
+
+>>>>
