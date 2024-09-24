@@ -13,7 +13,7 @@ router.route("/").get(allBlog)
 router.route("/createBlog").get(isAuthenticated, renderCreateBlog).post(isAuthenticated, upload.single('image'), createBlog)//yaha hamile single image upload huni banako so, upload.single gareko. If multiple image hunthyo vani upload.array garnu parthiyo.
 router.route("/single/:id").get(singleBlog)
 router.route("/delete/:id").get(isAuthenticated, deleteBlog)
-router.route("/editBlog/:id").post(isAuthenticated, editBlog)
+router.route("/editBlog/:id").post(isAuthenticated, upload.single('image'), editBlog)
 router.route("/edit/:id").get(isAuthenticated, rendereditBlog)
 router.route("/myBlogs").get(isAuthenticated, renderMyBlogs)
 

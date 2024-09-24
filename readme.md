@@ -195,4 +195,20 @@ npm install cookie-parser
 
 - checking filetype while uploading.
 
->>>>
+# day 22:
+edit page image implementation/ delete page maa image implementation
+- understanding the concept of filesystem.
+(images are not stored on databases, their link/name only stored on database)
+
+- blog ko image update garera change garepaxi purano image lai delete garnu parney hunxa. Tesko lagi fs vanni package hunxa. fs means file system. Wee have to require fs in blogcontroller.js,
+- to delete specific file/image , we need that fileName and path.
+we have to do this:
+        fs.unlink("uploads/" + fileNameInUploadFolder, (err)=>{
+                if(err){
+                console.log("Error while deleting file", err);
+                
+                }else{
+                console.log("File Deleted Successfully.");
+                
+                }
+        })
