@@ -1,4 +1,3 @@
-const { log } = require("console");
 const { blogs, users } = require("../../model");
 const fs = require("fs")//fs is filesystem.
 exports.renderCreateBlog = (req,res)=>{
@@ -135,6 +134,7 @@ exports.rendereditBlog = async (req, res)=>{
 
 exports.editBlog = async (req,res)=>{
     //console.log(req.body);
+    //const userId = req.userId
     const id = req.params.id
 
 
@@ -158,11 +158,14 @@ exports.editBlog = async (req,res)=>{
     //if user ley blog edit garni bela new image file halyo vani tyo file ko name env bata aako link maa concat gareko.
     //aani if file change vayena vani else wala old image kai id rahanxa.
     //basically, naya aayo vani tyo naya image ko url aani aayena vani purano j xa tei.
-    const oldDatas = await blogs.findAll({
-        where : {
-            id : id
-        }
-    })
+    // const oldDatas = await blogs.findAll({
+    //     where : {
+    //         id : id
+    //     }
+    // })
+    // if(oldDatas[0].userId !== userId){
+    //     return res.send("You cannot edit this Blog");
+    // }
     let fileUrl;
     if(req.file){
         fileUrl = process.env.PROJECT_URL + req.file.filename
