@@ -102,16 +102,90 @@ exports.singleBlog = async (req, res)=>{
 
 
 
-exports.deleteBlog  = async (req,res)=>{
-    const id = req.params.id
-    //blogs vanni id bata tyo id ko blog delete gar vaneko
-    await blogs.destroy({
-        where : {
-            id : id
+// exports.deleteBlog  = async (req,res)=>{
+//     const id = req.params.id
+//     //blogs vanni id bata tyo id ko blog delete gar vaneko
+//     await blogs.destroy({
+//         where : {
+//             id : id
+//         }
+//     })
+//     res.redirect("/")
+// }
+// exports.deleteBlog("/blog/:id",async (req,res)=>{
+//     const id = req.params.id
+//     const blog = await blog.findById(id)
+//     const imageName = blog.image
+ 
+//     fs.unlink(storage/${imageName},(err)=>{
+//         if(err){
+//             console.log(err)
+//         }else{
+//             console.log("File deleted successfully")
+//         }
+//     })
+//     await blog.findByIdAndDelete(id)
+//     res.status(200).json({
+//         message : 'Blog deleted successfully'
+//     })
+// })
+
+// Delete blog route
+// Delete Blog Function
+exports.deleteBlog = async (req, res) => {
+    try {
+        const id = req.params.id; // Get the blog ID from the request parameters
+
+        // Find the blog by ID
+        const blog = await blogs.findOne({
+            where: {
+                id: id
+            }
+        });
+
+        if (!blog) {
+            return res.status(404).send('Blog not found');
         }
-    })
-    res.redirect("/")
-}
+
+        // Get the image URL from the blog record
+        const imageUrl = blog.image; // Assuming 'image' is the field that stores the image URL
+        const lengthToCut = "http://localhost:3000/".length; // Length of the base URL
+        const fileNameInUploadFolder = imageUrl.slice(lengthToCut); // Extract the file path after the base URL
+
+        // Delete the image from the filesystem
+        // const filePath = path.join(__dirname, '../uploads', fileNameInUploadFolder);
+        fs.unlink("uploads/" + fileNameInUploadFolder, (err)=>{
+            if (err) {
+                console.log("Error while deleting the image file:", err);
+            } else {
+                console.log("Image file deleted successfully.");
+            }
+        });
+   // fs.unlink("uploads/" + fileNameInUploadFolder, (err)=>{
+    //     if(err){
+    //         console.log("Error while deleting file", err);
+            
+    //     }else{
+    //         console.log("File Deleted Successfully.");
+            
+    //     }
+    // })
+        // Delete the blog entry from the database
+        await blogs.destroy({
+            where: {
+                id: id
+            }
+        });
+
+        // Redirect to the homepage after deletion
+        res.redirect("/");
+    } catch (error) {
+        console.error("Error deleting blog:", error);
+        res.status(500).send('Server error');
+    }
+};
+
+
 
     //this is a editblog piece of code. just checking
          // fs.unlink('uploads/test.txt',(err)=>{
@@ -123,15 +197,7 @@ exports.deleteBlog  = async (req,res)=>{
     // })//unlink vaneko hatauni vaneko ho
 
 
-    // fs.unlink("uploads/" + fileNameInUploadFolder, (err)=>{
-    //     if(err){
-    //         console.log("Error while deleting file", err);
-            
-    //     }else{
-    //         console.log("File Deleted Successfully.");
-            
-    //     }
-    // })
+ 
 
 
 
@@ -189,6 +255,16 @@ exports.editBlog = async (req,res)=>{
     //const userId = req.userId
     const id = req.params.id
 
+        // Fetch the existing blog data (old blog)
+        const oldDatas = await blogs.findAll({
+            where: {
+                id: id
+            }
+        });
+    
+        if (oldDatas.length === 0) {
+            return res.status(404).send("Blog not found");
+        }
 
     //second approach but bad approach:
     // await blogs.update(req.body, {
