@@ -18,6 +18,7 @@ app.use(async (req,res,next)=>{
     //console.log("Hello i am triggered");
     const token = req.cookies.token
     res.locals.currentUser = req.cookies.token
+    //single blog maa jo user ley blog create gareko tesle matra edit delete button dekhauni. yo singleblog.ejs maa delete ra edit button maa pply vako xa
     if(token){
         const decryptedResult = await decodeToken(token, process.env.SECRETKEY)
         if(decryptedResult && decryptedResult.id){

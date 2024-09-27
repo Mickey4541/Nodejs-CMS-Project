@@ -92,7 +92,7 @@ exports.logOut = (req, res) => {
 }
 
 
-
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //forget password:
 exports.forgetPassword = (req, res) => {
     res.render("forgetPassword");
@@ -133,13 +133,14 @@ exports.checkForgetPassword = async (req, res) => {
             email: email
         }
     })
+
     if (emailExists.length == 0) {
         res.send("User with that email doesn't exist")
     } else {
         //tyo email maa otp pathauni
         //yo sendEmail chai uta sendEmail.js bata export gareko wala ho
         const generatedOtp = Math.floor(1000 + Math.random() * 8000);
-        console.log(generatedOtp);
+        //console.log(generatedOtp);
         
         await sendEmail({
             email: email,
@@ -154,7 +155,6 @@ exports.checkForgetPassword = async (req, res) => {
     }
 
 }
-
 
 exports.renderOtpForm = (req,res) => { 
     //url maa hamro email aako xa ra teslai access garda req.query maa aauxa.
@@ -175,6 +175,7 @@ exports.handleOtp = async (req,res)=>{
             otp : otp
         }
     })
+
     if(userData.length == 0){
         res.send("Invalid OTP.")
     }else{
@@ -182,20 +183,80 @@ exports.handleOtp = async (req,res)=>{
         const otpGeneratedTime = userData[0].otpGeneratedTime//past time
         if(currentTime - otpGeneratedTime <= 120000){
             //otp use vaisakepaxi null pardini
-            userData[0].otp = null
-            userData[0].otpGeneratedTime = null
-            await userData[0].save()
-            res.redirect("/passwordChange")
+            // userData[0].otp = null
+            // userData[0].otpGeneratedTime = null
+            // await userData[0].save()
+            // res.redirect("/passwordChange?email=" + email)
+            res.redirect(`/passwordChange?email=${email}&otp=${otp}`)
         }else{
-            res.send("invalid expired");
+            res.send("OTP has expired");
             
         }
     }
     //console.log(otp,email);
 }
 
-
 //change password form
 exports.renderPasswordChangeForm = (req,res) => {
-    res.render("passwordChangeForm")
+    const email = req.query.email
+    const otp = req.query.otp
+    if(!email || !otp){
+        return res.send("Email and OTP should be provided in the query")
+    }
+    res.render("passwordChangeForm",{email,otp})
+}
+
+//handeling changing password
+exports.handlePasswordChange = async(req,res) => {
+    const email = req.params.email
+    // const email = req.body.email
+    const otp = req.params.otp
+    // const otp = req.body.otp 
+    // console.log(otp);
+    const newPassword = req.body.newPassword
+    const confirmPassword = req.body.confirmPassword
+    if(!newPassword || !confirmPassword || !email || !otp){
+        return res.send("Please provide email, newPassword and confirmPassword and otp")
+    }
+
+    //checking if that email's otp or not.
+    const userData = await users.findAll({
+        where : {
+            email : email,
+            otp : otp
+        }
+    })
+
+    if(newPassword !== confirmPassword){
+        res.send("new password and confirmPassword doesn't matched")
+    }
+
+    if(userData.length == 0){
+        return res.send("Don't try to do this.")
+    }
+    const currentTime = Date.now()
+    const otpGeneratedTime = userData[0].otpGeneratedTime
+    console.log(currentTime,otpGeneratedTime,currentTime-otpGeneratedTime);
+    
+    if(currentTime - otpGeneratedTime >= 120000){
+        return res.redirect("/forgetPassword")
+    }
+
+    const hashedNewPassword = bcrypt.hashSync(newPassword,8)
+    //match vayo vani
+    // const userData = await users.findAll({
+    //     email : email
+    // })
+    // userData[0].password = newPassword
+    // await userData[0].save()
+    /////////OR///////////////
+
+    await users.update({
+        password : hashedNewPassword
+    },{
+        where : {
+            email : email
+        }
+    })
+    res.redirect("/login")
 }
