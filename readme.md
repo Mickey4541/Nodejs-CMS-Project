@@ -212,3 +212,10 @@ we have to do this:
                 
                 }
         })
+
+# Day 23:
+sending otp to gmail using nodemailer
+forge password:
+npm install nodemailer.
+step1: form with email input . Email halepaxi users table maa
+query garney users.findAll(email). If tyo email xa vaney tyo email maa otp pathauni

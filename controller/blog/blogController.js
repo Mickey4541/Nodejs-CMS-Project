@@ -161,16 +161,6 @@ exports.deleteBlog = async (req, res) => {
                 console.log("Image file deleted successfully.");
             }
         });
-   // fs.unlink("uploads/" + fileNameInUploadFolder, (err)=>{
-    //     if(err){
-    //         console.log("Error while deleting file", err);
-            
-    //     }else{
-    //         console.log("File Deleted Successfully.");
-            
-    //     }
-    // })
-        // Delete the blog entry from the database
         await blogs.destroy({
             where: {
                 id: id
@@ -187,48 +177,6 @@ exports.deleteBlog = async (req, res) => {
 
 
 
-    //this is a editblog piece of code. just checking
-         // fs.unlink('uploads/test.txt',(err)=>{
-    //     if(err){
-    //         console.log("Error happens");
-    //     }else{
-    //         console.log("Deleted successfully");  
-    //     }
-    // })//unlink vaneko hatauni vaneko ho
-
-
- 
-
-
-
-
-// exports.deleteBlog = async(req,res)=>{
-//     const id = req.params.id 
-//     const blog = await blogs.findAll({
-//         where : {
-//             id : id 
-//         }
-//     })
-//     const fileName = blog[0].imageUrl 
-//     const lengthToCut = "http://localhost:3000/".length 
-//     const fileNameAfterCut = fileName.slice(lengthToCut)
-//     fs.unlink("./uploads/" + fileNameAfterCut,(err)=>{
-//         if(err){
-//             console.log("error occured",err)
-//         }else{
-//             console.log("file deleted successfully")
-//         }
-//     })
-//     // aako id ko data(row) chae blogs vanney table bata delete garnu paryo 
-  
-//    await  blogs.destroy({
-//         where : {
-//             id : id
-//         }
-//     })
-//     res.redirect("/")
-
-// }
 
 
 
