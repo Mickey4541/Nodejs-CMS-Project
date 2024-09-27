@@ -218,4 +218,12 @@ sending otp to gmail using nodemailer
 forge password:
 npm install nodemailer.
 step1: form with email input . Email halepaxi users table maa
-query garney users.findAll(email). If tyo email xa vaney tyo email maa otp pathauni
+query garney users.findAll(email). If tyo email xa vaney tyo email maa otp pathauni.
+
+# day 24 >> validating the otp, otp expiration time:
+- users table maa otp and otp expiration time(like 2 minutes) two column add garnu paryo.
+- making otp dynamic and random
+- making a page with input field to enter the otp
+- validating the otp entered by the person.
+-if form is valid, render changepassword form.
+

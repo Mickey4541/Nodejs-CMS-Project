@@ -138,12 +138,64 @@ exports.checkForgetPassword = async (req, res) => {
     } else {
         //tyo email maa otp pathauni
         //yo sendEmail chai uta sendEmail.js bata export gareko wala ho
+        const generatedOtp = Math.floor(1000 + Math.random() * 8000);
+        console.log(generatedOtp);
+        
         await sendEmail({
             email: email,
             subject: "Forget Password OTP from (COMPANY_NAME)",
-            otp: 1234
+            otp: generatedOtp
         })
+        emailExists[0].otp = generatedOtp
+        emailExists[0].otpGeneratedTime = Date.now()//time in millisecond
+        await emailExists[0].save()
+        res.redirect("/otp?email=" + email)
+        // res.redirect("/otp")
     }
 
-    res.send("Email Send Successfully.")
+}
+
+
+exports.renderOtpForm = (req,res) => { 
+    //url maa hamro email aako xa ra teslai access garda req.query maa aauxa.
+    const email = req.query.email
+    res.render("otpForm",{email : email})//yaha bata email pass gareko ra tyo email otpForm.esj bata access vako xa.
+}
+
+//function to handle the otp for post method
+exports.handleOtp = async (req,res)=>{
+    const otp = req.body.otp
+    const email = req.params.id
+    if(!otp || !email){
+        return res.send("Please send email, otp.")
+    }
+    const userData = await users.findAll({
+        where : {
+            email : email,
+            otp : otp
+        }
+    })
+    if(userData.length == 0){
+        res.send("Invalid OTP.")
+    }else{
+        const currentTime = Date.now()//current Time
+        const otpGeneratedTime = userData[0].otpGeneratedTime//past time
+        if(currentTime - otpGeneratedTime <= 120000){
+            //otp use vaisakepaxi null pardini
+            userData[0].otp = null
+            userData[0].otpGeneratedTime = null
+            await userData[0].save()
+            res.redirect("/passwordChange")
+        }else{
+            res.send("invalid expired");
+            
+        }
+    }
+    //console.log(otp,email);
+}
+
+
+//change password form
+exports.renderPasswordChangeForm = (req,res) => {
+    res.render("passwordChangeForm")
 }
