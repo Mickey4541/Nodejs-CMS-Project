@@ -14,9 +14,16 @@ app.use(cookieParser())
 require("./model/index")
 
 //making navbar dynamic, app.use maa haleko code everytime trigger hunxa.
-app.use((req,res,next)=>{
+app.use(async (req,res,next)=>{
     //console.log("Hello i am triggered");
+    const token = req.cookies.token
     res.locals.currentUser = req.cookies.token
+    if(token){
+        const decryptedResult = await decodeToken(token, process.env.SECRETKEY)
+        if(decryptedResult && decryptedResult.id){
+            res.locals.currentUserId = decryptedResult.id
+        }
+    }
     next()
     
 })
@@ -87,7 +94,8 @@ app.use(express.static("uploads"))
 const blogRoute = require("./routes/blogRoute.js")
 app.use("",blogRoute)//localhost:3000 + /createBlog ===localhost:3000/createBlog
 
-const authRoute = require("./routes/authRoute.js")
+const authRoute = require("./routes/authRoute.js");
+const { decodeToken } = require('./services/decodeToken.js');
 app.use("", authRoute) //localhost:3000/register
 
 // for ex : 

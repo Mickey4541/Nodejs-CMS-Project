@@ -1,7 +1,8 @@
 const jwt = require("jsonwebtoken")
 //const promisify = require("util").promisify
-const {promisify} = require("util")
+// const {promisify} = require("util")
 const {users} = require("../model")
+const { decodeToken } = require("../services/decodeToken")
 
 
 exports.isAuthenticated = async(req,res,next)=>{
@@ -11,7 +12,7 @@ exports.isAuthenticated = async(req,res,next)=>{
         return res.send("You must be logged In first !!")
     }
     // verify token if it is legit or not
-    const decryptedResult = await promisify (jwt.verify)(token, process.env.SECRETKEY)
+    const decryptedResult = await decodeToken(token, process.env.SECRETKEY)
     /*This is a alternative approach of promisify */
     // await promisify (jwt.verify)(token, process.env.SECRETKEY,(error,success)=>{
     //     if(success){
