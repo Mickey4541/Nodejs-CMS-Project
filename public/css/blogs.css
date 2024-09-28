@@ -77,6 +77,15 @@ h1 {
     text-align: center;
     margin: 10px 0;
 }
+/* styles.css */
+.fade-out {
+    opacity: 1;
+    transition: opacity 1s ease-out;
+}
+.fade-out.hidden {
+    opacity: 0;
+}
+
 
 /* Card container styling */
 .card-container {

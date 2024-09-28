@@ -12,7 +12,11 @@
 
     <!-- Navbar importing from navbar.ejs-->
     <%- include("components/navbar.ejs") %>
-
+    <div id="flash-message" style="position: relative; display: flex; justify-content: center;  height: auto;">
+        <p style="color: green; font-size: 30px; background-color: rgba(95, 89, 89, 0.8) ; padding: 5px 20px; border-radius: 10px; text-align: center;"><%- success %></p>
+    </div>
+    
+    
         <!-- Card Section 
      js ko code maa tyo - hunna. card-container ko kuraa see in readme.md-->
 
@@ -23,17 +27,28 @@
                         <div class="card-title"><%- blog.title %></div>
                         <div class="card-subtitle"><%- blog.subTitle %></div>
                         <img src="<%= blog.image %>" alt="" height="300" width="300" style="display: block; margin: auto;">
-                        <div class="card-description"><%-
-                                blog.description.split(" ").slice(0, 10).join(" ") %>...</div>                
+                        <div class="card-description">
+                            <%- blog.description.split(" ").slice(0, 10).join(" ") %>...
+                        </div>   
+
                     <!-- Explanation:
                     - blog.description.split(" "): This splits the description into an array of words using spaces as separators.
                     - .slice(0, 10): This takes the first 10 words from the array.
                     - .join(" "): This joins the words back into a string with spaces between them.
                     - The ... at the end represents that the description continues, indicating that the full content can be read by clicking "
                                 Read More." -->
-                                <p>Written by: <%- blog.user.username %></p>
-                                <p>Published on: <%- blog.user.createdAt.toISOString().split('T')[0] %></p>
+                                <% if (blog.user) { %>
+                                    <p>Written by: <%- blog.user.username %></p>
+                                    <p>Published on: <%- blog.user.createdAt.toISOString().split('T')[0] %></p>
+                                <% } else { %>
+                                    <p>Written by: Unknown</p>
+                                    <p>Published on: N/A</p>
+                                <% } %>
                                 <a href="/single/<%- blog.id %>">Read More</a>
+
+                                <!-- <p>Written by: <%- blog.user.username %></p>
+                                <p>Published on: <%- blog.user.createdAt.toISOString().split('T')[0] %></p>
+                                <a href="/single/<%- blog.id %>">Read More</a> -->
                             
                             
                         </div>
@@ -47,18 +62,31 @@
 
                     <%- include("components/footer.ejs") %>
 
+<script>
+                    // scripts.js
 
-                        <script>
-                            function toggleMenu() {
-                                const navbarMenu = document.getElementById('navbar-menu');
-                                if (navbarMenu.classList.contains('show-menu')) {
-                                    navbarMenu.classList.remove('show-menu');
-                                } else {
-                                    navbarMenu.classList.add('show-menu');
-                                }
-                            }
-                        </script>
-
+                    // Function to toggle the visibility of the navbar menu
+                    function toggleMenu() {
+                        const navbarMenu = document.getElementById('navbar-menu');
+                        if (navbarMenu.classList.contains('show-menu')) {
+                            navbarMenu.classList.remove('show-menu');
+                        } else {
+                            navbarMenu.classList.add('show-menu');
+                        }
+                    }
+                    
+                    // Function to automatically hide the flash message after 4 seconds
+                    setTimeout(function() {
+                        const flashMessage = document.getElementById('flash-message');
+                        if (flashMessage) {
+                            flashMessage.classList.add('fade-out', 'hidden'); // Add fade-out class
+                            setTimeout(() => {
+                                flashMessage.style.display = 'none'; // Hide after fade-out
+                            }, 1000); // Wait for the fade-out duration before hiding
+                        }
+                    }, 1000);
+                    
+</script>
 </body>
 
 </html>

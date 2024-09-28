@@ -227,3 +227,39 @@ query garney users.findAll(email). If tyo email xa vaney tyo email maa otp patha
 - validating the otp entered by the person.
 -if form is valid, render changepassword form.
 
+# day 26:
+- displaying message using flash.
+> session concept -> express-session package(npm install express-session)
+> connect flash -> npm install connect-flash
+
+ > first inside app.js
+//flashing a message code:::::::::::::::::::;
+//require express-session and connect-flash
+const session = require("express-session")
+const flash = require("connect-flash")
+
+//setting session. nodejs lai session use gar vaneko
+app.use(session({
+    secret : "helloworld",
+    resave : false,
+    saveUninitialized : false
+}))
+app.use(flash())
+> first invalid password message kaa bata aako xa tyo catch garni:
+- tyo chai authcontroller.js maa exports.loginUser xa, tya invalid password message khojni res.send("invalid password hunxa).
+- tya aba : req.flash("error", "Invalid Password")
+            res.redirect("/login") yo code lekhni
+> note: flash garepaxi always do a redirect.
+
+> aba tyo login.ejs dekhauni code kaa xa tyo khojni means: inside authcontroller.js: there is a code of login:
+exports.renderLoginForm = (req, res) => {
+    const error = req.flash("error")
+    res.render("login", {error : error})
+}
+> yo yaha {error : error } mathi req.flash ko key{error} pass gareko.
+
+> Then accessing that error key/message from login.ejs inside form container:
+- <div class="form-container">
+        <p><%- error %></p>
+
+

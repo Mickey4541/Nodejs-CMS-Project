@@ -4,6 +4,23 @@ const express = require('express');
 //const { renderCreateBlog, createBlog, allBlog, singleBlog, deleteBlog, rendereditBlog, editBlog } = require('./controller/blog/blogController');
 const app = express()
 
+
+
+//flashing a message code:::::::::::::::::::;
+//require express-session and connect-flash
+const session = require("express-session");
+const flash = require("connect-flash");
+//setting session for flashing message. nodejs lai session use gar vaneko
+app.use(session({
+    secret : "helloworld",
+    resave : false,
+    saveUninitialized : false
+}))
+app.use(flash())
+
+
+
+
 require("dotenv").config()//requiring dotenv and initializing it with default configuration.
 
 
@@ -99,5 +116,9 @@ const authRoute = require("./routes/authRoute.js");
 const { decodeToken } = require('./services/decodeToken.js');
 app.use("", authRoute) //localhost:3000/register
 
+
 // for ex : 
 // app.use("/auth", authRoute) //localhost:3000/auth/register
+
+
+

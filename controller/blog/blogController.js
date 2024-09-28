@@ -51,6 +51,7 @@ exports.createBlog =  async (req, res)=>{
 
 
 exports.allBlog = async (req,res)=>{
+    const success = req.flash("success")
     //aaba database ko data homepage(blogs) ko card maa dekhaunu parni xa.
     //so hamile yehi blogs page maa data nikalna laako.
     //blogs vanni table bata vayejati sabai data dey vaneko.
@@ -64,7 +65,7 @@ exports.allBlog = async (req,res)=>{
     //console.log(allBlogs);
     
     //blogs vanni key maa allBlogs vanni value maa aako data pass gareko
-    res.render("blogs", {blogs:allBlogs});
+    res.render("blogs", {blogs:allBlogs, success : success});
 }
 
 

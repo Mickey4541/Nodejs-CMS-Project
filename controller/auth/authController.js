@@ -33,7 +33,8 @@ exports.registerUser = async (req, res) => {
 
 //LOGIN STARTS FORM HERE:::::::::::::::::::::::::::::::;;;
 exports.renderLoginForm = (req, res) => {
-    res.render("login")
+    const error = req.flash("error");
+    res.render("login", {error : error})
 }
 
 exports.loginUser = async (req, res) => {
@@ -77,9 +78,11 @@ exports.loginUser = async (req, res) => {
 
             console.log("This is token..." + token);
 
-            res.send("Login Successfully")
+            req.flash("success", "Logged in Successfully")
+            res.redirect("/")
         } else {
-            res.send("Invalid password.")
+            req.flash("error", "Invalid Password")
+            res.redirect("/login")
         }
     }
     //if the email exist it gives=>[] and xa vaney[{name: "", password: "", email: ""}]

@@ -94,7 +94,7 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         width: 300px;
         margin-top: 10px;
-        height: 40vh;
+        height: 45vh;
     }
     .form-container h2 {
         text-align: center;
@@ -154,7 +154,10 @@
 <body>
     <%- include("components/navbar.ejs") %>
     <div class="form-container">
-        <h2>Login</h2>
+        <div class="flash-message-container" style="display: flex; justify-content: center; align-items: center; height: auto; background-color: rgba(255, 255, 255, 0.9);">
+            <p id="flash-message" style="color: red; font-size: medium; font-weight: bold; margin: 0;"><%- error %></p>
+        </div>
+                <h2>Login</h2>
         <form action="/login" method="POST">
             <div class="form-group">
                 <label for="email">Email:</label>
@@ -182,5 +185,9 @@
             navbarMenu.classList.add('show-menu');
         }
     }
+    setTimeout(function() {
+        const messageContainer = document.querySelector('.flash-message-container');
+        messageContainer.style.display = 'none'; // Hide the message
+    }, 2000); // 2000 milliseconds = 2 seconds
 </script>
 </html>
