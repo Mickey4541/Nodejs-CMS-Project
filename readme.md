@@ -262,4 +262,45 @@ exports.renderLoginForm = (req, res) => {
 - <div class="form-container">
         <p><%- error %></p>
 
+# Day 27:(Handeling a crash of backend)
+- Simple Error Handeling - try catch:
+- Raw queries in sequelize
+- Authcoltroller.js bhitra exports.registerUser lai hamile try catch block maa wrap gareko xam. tyo vaneko error handeling gareko ho if error aayo vani yeso garda server crash hudaina.
+
+
+# Method 1: to catch and handle error######
+- doing flash message:
+> inside authcontroller and renderregisterform:
+exports.renderRegisterForm = (req, res) => {
+    const error = req.flash('error')
+    res.render("register",{error : error})
+}
+>and inside register.ejs
+        <p style="color: red; font-size: 20px; background-color: white;"><%= error %></p>
+> and inside exports.register user:
+ //insert in to table (users)
+    await users.createssss({
+        email: email,
+        password: bcrypt.hashSync(password, 8),
+        username: username,
+    })
+    res.redirect("/login")
+    } catch (e) {
+        //res.send(e.message)
+        req.flash("error", "Something went wrong.")
+        res.redirect("/register")
+    }
+# IMPORTANT: jasari hamile yaha aauta controller lai try catch maa haleko xam tesai gari all controller lai pani try catch maa halnu parxa kinaki paxi production maa gayera kunai controller maa error aayo vani server crash huna bata bachauna sakinxa.
+
+- Note that this is just a learning of one alternative of error handeling. but in professional, we do it in another alternative.
+- Another alternative is that make a catchError.js in service folder and write a code and then wrap every controller in catchError inside authroute.js like:
+- router.route("/login").get(catchError(renderLoginForm)).post(catchError(loginUser)). Tes paxi:
+# Method 1: to catch and handle error###### => yo sabai method 1 maa vako steps garnu parxa message show/flash garna.
+31:43
+
+
+
+
+
+
 

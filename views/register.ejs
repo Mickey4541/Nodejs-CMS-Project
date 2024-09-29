@@ -150,6 +150,7 @@
     <%- include("components/navbar.ejs") %>
     <div class="form-container">
         <h2>Signup</h2>
+        <p style="color: red; font-size: 20px; background-color: white;"><%= error %></p>
         <form action="/register" method="POST">
             <div class="form-group">
                 <label for="username">Username:</label>

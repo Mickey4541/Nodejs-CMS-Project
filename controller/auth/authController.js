@@ -2,12 +2,18 @@ const { users } = require("../../model");
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken");
 const sendEmail = require("../../services/sendEmail");
+
+
+
+
 exports.renderRegisterForm = (req, res) => {
-    res.render("register")
+    const error = req.flash('error')
+    res.render("register",{error : error})
 }
 
 exports.registerUser = async (req, res) => {
-    console.log(req.body);
+    try {
+          //console.log(req.body);
     const { email, username, password, confirmPassword } = req.body
 
 
@@ -21,12 +27,17 @@ exports.registerUser = async (req, res) => {
         return res.send("Please enter same password....")
     }
     //insert in to table (users)
-    await users.create({
+    await users.creates({
         email: email,
         password: bcrypt.hashSync(password, 8),
         username: username,
     })
     res.redirect("/login")
+    } catch (e) {
+        //res.send(e.message)
+        req.flash("error","Something went wrong, Try Again.")
+        res.redirect("/register")
+    }
 }
 
 
@@ -98,7 +109,7 @@ exports.logOut = (req, res) => {
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //forget password:
 exports.forgetPassword = (req, res) => {
-    res.render("forgetPassword");
+    res.renderssss("forgetPassword");
 }
 exports.checkForgetPassword = async (req, res) => {
     const email = req.body.email

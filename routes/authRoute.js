@@ -1,15 +1,16 @@
 const { renderRegisterForm, registerUser, renderLoginForm, loginUser, logOut, forgetPassword, checkForgetPassword, renderOtpForm, handleOtp, renderPasswordChangeForm, handlePasswordChange } = require("../controller/auth/authController");
+const catchError = require("../services/catchError");
 
 const router = require("express").Router()
 
 
 
 router.route("/register").get(renderRegisterForm).post(registerUser)
-router.route("/login").get(renderLoginForm).post(loginUser)
-router.route("/logout").get(logOut)
-router.route("/forgetPassword").get(forgetPassword).post(checkForgetPassword)
-router.route("/otp").get(renderOtpForm)
-router.route("/otp/:id").post(handleOtp)
-router.route("/passwordChange").get(renderPasswordChangeForm)
-router.route("/passwordChange/:email/:otp").post(handlePasswordChange)
+router.route("/login").get(catchError(renderLoginForm)).post(catchError(loginUser))
+router.route("/logout").get(catchError(logOut))
+router.route("/forgetPassword").get(catchError(forgetPassword)).post(catchError(checkForgetPassword))
+router.route("/otp").get(catchError(renderOtpForm))
+router.route("/otp/:id").post(catchError(handleOtp))
+router.route("/passwordChange").get(catchError(renderPasswordChangeForm))
+router.route("/passwordChange/:email/:otp").post(catchError(handlePasswordChange))
 module.exports = router;
