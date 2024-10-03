@@ -5,7 +5,7 @@ const router = require("express").Router()
 
 
 
-router.route("/register").get(renderRegisterForm).post(registerUser)
+router.route("/register").get(renderRegisterForm).post(catchError(registerUser))
 router.route("/login").get(catchError(renderLoginForm)).post(catchError(loginUser))
 router.route("/logout").get(catchError(logOut))
 router.route("/forgetPassword").get(catchError(forgetPassword)).post(catchError(checkForgetPassword))

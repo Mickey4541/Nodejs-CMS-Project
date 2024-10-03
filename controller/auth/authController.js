@@ -12,7 +12,8 @@ exports.renderRegisterForm = (req, res) => {
 }
 
 exports.registerUser = async (req, res) => {
-    try {
+    //yesari try catch bhitra garepani hunxa.
+    // try {
           //console.log(req.body);
     const { email, username, password, confirmPassword } = req.body
 
@@ -32,11 +33,11 @@ exports.registerUser = async (req, res) => {
         username: username,
     })
     res.redirect("/login")
-    } catch (e) {
-        //res.send(e.message)
-        req.flash("error","Something went wrong, Try Again.")
-        res.redirect("/register")
-    }
+    // } catch (e) {
+    //     //res.send(e.message)
+    //     req.flash("error","Something went wrong, Try Again.")
+    //     res.redirect("/register")
+    // }
 }
 
 
