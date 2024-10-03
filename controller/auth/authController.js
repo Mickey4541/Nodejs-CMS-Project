@@ -27,7 +27,7 @@ exports.registerUser = async (req, res) => {
         return res.send("Please enter same password....")
     }
     //insert in to table (users)
-    await users.createsssss({
+    await users.create({
         email: email,
         password: bcrypt.hashSync(password, 8),
         username: username,
