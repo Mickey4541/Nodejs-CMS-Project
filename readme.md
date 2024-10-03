@@ -298,7 +298,10 @@ exports.renderRegisterForm = (req, res) => {
 - Another alternative is that make a catchError.js in service folder and write a code and then wrap every controller in catchError inside authroute.js like:
 - router.route("/login").get(catchError(renderLoginForm)).post(catchError(loginUser)). Tes paxi:
 # Method 1: to catch and handle error###### => yo sabai method 1 maa vako steps garnu parxa message show/flash garna.
-31:43
+
+
+# Raw queries in sequelize>>>>>>>>>>>>>>>>>>>>>>>>>
+
 
 
 

@@ -1,6 +1,11 @@
-const { QueryTypes } = require("sequelize");
-const { blogs, users, sequelize } = require("../../model");
+const { blogs, users} = require("../../model");
 const fs = require("fs")//fs is filesystem.
+const { QueryTypes } = require("sequelize");
+
+const db = require("../../model/index");
+const sequelize = db.sequelize
+
+
 
 
 
@@ -21,11 +26,21 @@ exports.createBlog =  async (req, res)=>{
     const title = req.body.title
     const description = req.body.description
     const subTitle = req.body.subtitle
-     //This is for image.
-     const fileName = req.file.filename;
+    const fileName = req.file.filename;
+
      if(!title || !description || !subTitle || !req.file){
         return res.send("Please Provide title, description, subtitle and filename.")
      }
+    //  let fileName;
+    //  if(!req.file){
+    //     fileName = "https://www.google.com/imgres?q=pixabay&imgurl=https%3A%2F%2Fcdn.pixabay.com%2Fphoto%2F2018%2F04%2F04%2F13%2F38%2Fnature-3289812_1280.jpg&imgrefurl=https%3A%2F%2Fpixabay.com%2Fphotos%2Fnature-earth-sustainability-leaf-3289812%2F&docid=UTJZQZMuLI620M&tbnid=T3pgUlTyuffDLM&vet=12ahUKEwiNrK_-6fKIAxVUwzgGHTzAMf0QM3oECGkQAA..i&w=1280&h=853&hcb=2&ved=2ahUKEwiNrK_-6fKIAxVUwzgGHTzAMf0QM3oECGkQAA"
+    //  }else{
+    //     //This is for image.
+    //     fileName = req.file.filename;
+    //  }
+
+
+
     //console.log(title, subTitle, description);
     
     //tara if yei 3 line lai destructure garnu paryo vani:
@@ -54,11 +69,18 @@ exports.createBlog =  async (req, res)=>{
         userId: blogCreateGarniUserKoId, //kun id ko user ley blog create gareko ho. yo chai mathi line no. 11 bata aako.
         image : process.env.PROJECT_URL + fileName
     })
+
+    //RAW QUERY::::::::::::::::::::::;
+    // await sequelize.query("INSERT INTO blogs(title,subTite,description,userId,image) VALUES(?,?,?,?,?)",{
+    //     replacements : [title,subTitle,description,req.userId,process.env.PROJECT_URL + fileName],
+    //     type: QueryTypes.INSERT
+    // })
+
     //hamile form submit garna ko lagi request garim.
     //aaba request garepaxi response ta hunai parxa.
     //so, response maa res.send gareko.
     res.redirect("/")
-    console.log("UserId:", req.userId);
+    //console.log("UserId:", req.userId);
 }
 
 
@@ -70,6 +92,8 @@ exports.allBlog = async (req,res)=>{
     //aaba database ko data homepage(blogs) ko card maa dekhaunu parni xa.
     //so hamile yehi blogs page maa data nikalna laako.
     //blogs vanni table bata vayejati sabai data dey vaneko.
+
+
     const allBlogs = await blogs.findAll({
         //aba yaha blogs vanney table sanga users vanni table join garna lageko.
         //join garnu parey include baata garney.
@@ -78,7 +102,13 @@ exports.allBlog = async (req,res)=>{
         }
     })
     //console.log(allBlogs);
-    
+    //  Mathi ko yo :::  const allBlogs = await blogs.findAll({  garnu vaneko raw query hoina, aba raw query use garnu paryo vani yesari garni::::
+    // const allBlogs = await sequelize.query("SELECT * FROM blogs",{
+    //     tpe: sequelize.QueryTypes.SELECT
+    // })
+
+
+
     //blogs vanni key maa allBlogs vanni value maa aako data pass gareko
     res.render("blogs", {blogs:allBlogs, success : success});
 }
@@ -92,6 +122,7 @@ exports.singleBlog = async (req, res)=>{
     //second approach(destructuring)
     //const {id} = req.params
 
+
     //specific id ko data magnu/find garnu paryo aba database ko table bata.
     const blog = await blogs.findAll({
         where : {
@@ -102,6 +133,14 @@ exports.singleBlog = async (req, res)=>{
             model : users
         }
     })
+
+    //RAW QUERY>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    // const blogs = await sequelize.query("SELECT * FROM blogs JOIN users ON blogs.id = users.id WHERE blogs.id = ?",{
+    //     replacements : [id],
+    //     type : sequelize.QueryTypes.SELECT
+    // })
+
+
 
     //second approach
     //const blog = await blogs.findByPk(id)
@@ -182,6 +221,11 @@ exports.deleteBlog = async (req, res) => {
                 id: id
             }
         });
+        //RAW QUERY::::::::::::::::;
+        // await sequelize.query('DELETE FROM blogs WHERE id=?',{
+        //     replacements : [id],
+        //     type : sequelize.QueryTypes.DELETE
+        // })
 
         // Redirect to the homepage after deletion
         res.redirect("/");

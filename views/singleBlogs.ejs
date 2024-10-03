@@ -23,6 +23,7 @@
             published on <%- blog[0].createdAt.toISOString().slice(0,10)%>
         </div>
         <div>
+            <!-- blog controller bhitra exports.singleBlog maa if raw query haneko vaye user rakhnu pardaina. blog[0].username sidai lekhni. -->
             Author : <%- blog[0].user.username %>
         </div>
        <% if(currentUser){ %>
