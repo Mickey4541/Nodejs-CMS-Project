@@ -262,6 +262,8 @@ exports.renderLoginForm = (req, res) => {
 - <div class="form-container">
         <p><%- error %></p>
 
+
+
 # Day 27:(Handeling a crash of backend)
 - Simple Error Handeling - try catch:
 - Raw queries in sequelize
@@ -297,6 +299,16 @@ exports.renderRegisterForm = (req, res) => {
 - router.route("/login").get(catchError(renderLoginForm)).post(catchError(loginUser)). Tes paxi:
 # Method 1: to catch and handle error###### => yo sabai method 1 maa vako steps garnu parxa message show/flash garna.
 31:43
+
+
+
+
+# Understanding MultiTanent Architecture:::::::::::::
+- SASS(Software as a service : tally,yt,tigg,slack)
+- PASS(Platform as a service)
+- ERP(Enterprise Resource Planning)(very vast and difficult to produce)
+- SASS products are build in multitanent architecture.
+- 
 
 
 

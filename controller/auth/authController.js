@@ -22,12 +22,11 @@ exports.registerUser = async (req, res) => {
     //     return res.send("Please enter same password....")
     // }
 
-
     if (password !== confirmPassword) {
         return res.send("Please enter same password....")
     }
     //insert in to table (users)
-    await users.creates({
+    await users.createsssss({
         email: email,
         password: bcrypt.hashSync(password, 8),
         username: username,
@@ -109,7 +108,7 @@ exports.logOut = (req, res) => {
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //forget password:
 exports.forgetPassword = (req, res) => {
-    res.renderssss("forgetPassword");
+    res.render("forgetPassword");
 }
 exports.checkForgetPassword = async (req, res) => {
     const email = req.body.email

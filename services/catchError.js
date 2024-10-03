@@ -15,8 +15,8 @@
 //     };
 // };
 module.exports = (fn) => {
-    return (req, res) => {
-        fn(req,res).catch((err) => {
+    return (req, res, next) => {
+        fn(req,res,ne).catch((err) => {
             return res.send(err.message)
         });
     };
