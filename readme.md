@@ -307,7 +307,7 @@ exports.renderRegisterForm = (req, res) => {
 - PAAS(Platform as a service)
 - ERP(Enterprise Resource Planning)(very vast and difficult to produce)
 - SASS products are build in multitanent architecture.
-- 
+- Now, to understand multitanent, see in another repo node-multitanent-basics.
 
 
 
