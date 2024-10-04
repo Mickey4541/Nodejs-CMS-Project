@@ -47,6 +47,9 @@ exports.createBlog =  async (req, res)=>{
     /*const {title, subTitle, description} = req.body*/
 
 
+
+
+
     //Start of Multitanent saas product:
     //query to make a seperate blog table for each user.
     // await sequelize.query(`CREATE TABLE IF NOT EXISTS blog_${req.userId}(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,title VARCHAR(255), subTitle VARCHAR(255), description VARCHAR(255), userId INT REFERENCES users(id), image VARCHAR(255))`

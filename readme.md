@@ -302,13 +302,9 @@ exports.renderRegisterForm = (req, res) => {
 
 # Raw queries in sequelize>>>>>>>>>>>>>>>>>>>>>>>>>
 
-
-
-
-
 # Understanding MultiTanent Architecture:::::::::::::
-- SASS(Software as a service : tally,yt,tigg,slack)
-- PASS(Platform as a service)
+- SAAS(Software as a service : tally,yt,tigg,slack)
+- PAAS(Platform as a service)
 - ERP(Enterprise Resource Planning)(very vast and difficult to produce)
 - SASS products are build in multitanent architecture.
 - 
