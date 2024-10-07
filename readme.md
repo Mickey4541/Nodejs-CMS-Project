@@ -309,7 +309,21 @@ exports.renderRegisterForm = (req, res) => {
 - SASS products are build in multitanent architecture.
 - Now, to understand multitanent, see in another repo node-multitanent-basics.
 
+# Web security:
+- From input field, there can be xss attack, means hacker can insert the code form input field, so we have to sanitize the data. here we can do html encoding. we can do it manually but we have a package and we have to install it.
+> npm install sanitize-html
 
+- like forget password 1 minute maa kati patak garna dini type:
+yaha 1 minute maa kati patak blog create, edit and delete garna dini vanni kura aauxa:
+- tyo garna ko lagi package install garnu parni hunxa:
+> npm install express-rate-limit
+
+- There is one package called helmet. 
+- npm i helmet
+- inside app.js::
+const helmet = require("helmet")
+app.use(helmet())
+- References: nepcamp repo and Api-for-tour-Site Repo of Manish.
 
 
 

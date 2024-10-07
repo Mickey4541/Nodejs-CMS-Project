@@ -10,6 +10,14 @@ const app = express()
 //require express-session and connect-flash
 const session = require("express-session");
 const flash = require("connect-flash");
+const sanitizeHtml = require("sanitize-html")
+const rateLimit = require("express-rate-limit")
+const helmet = require("helmet")
+
+
+app.use(helmet())
+
+
 //setting session for flashing message. nodejs lai session use gar vaneko
 app.use(session({
     secret : "helloworld",
@@ -67,6 +75,13 @@ app.use(express.urlencoded({extended:true}))
 
 
 
+    const rateLimiter = rateLimit({
+        windows : 15*60*1000,
+        limit: 40,
+        message : "You have exceed the limit. Please try again after sometime."  
+    })
+    app.use("/forgetPassword", rateLimiter)
+
 
 
 
@@ -106,6 +121,11 @@ app.use(express.urlencoded({extended:true}))
 //vannu parxa ki malai yo yo file access garna dey.
 app.use(express.static("public"))
 app.use(express.static("uploads"))
+
+
+
+
+
 
 
 //ROUTES HERE
